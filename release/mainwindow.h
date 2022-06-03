@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "edit.h"
 #include "financial.h"
-
+#include "data.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,5 +35,6 @@ private:
     financial *financial_form;
 
     QString feedback;
+    Data *data;
 };
 #endif // MAINWINDOW_H

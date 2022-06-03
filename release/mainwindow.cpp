@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //credits string
     QString out[] = {"Este software foi desenvolvido pelos alunos \n\n",
                       "- Gabriel Nóbrega\n",
                       "- Lucas Soares\n",
@@ -24,6 +25,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     for(QString str : out){
         feedback += str;
+    }
+
+    //listWidget init
+    int size = data->getEmpresa().getVectorSize();
+    for(int i = 0; i < size; i++){
+            QString name = data->getEmpresa().get_Func_com_index(i).getNome();
+            QString number = data->getEmpresa().get_Func_com_index(i).getCodFuncionario();
+
+            QString view = number + " - " + name;
+            ui->listWidget->addItem(view);
     }
 
 }

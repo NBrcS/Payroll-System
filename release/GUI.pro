@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    data.cpp \
     edit.cpp \
     empresa.cpp \
     finaledit.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
     paymentsheet.cpp
 
 HEADERS += \
+    data.h \
     edit.h \
     empresa.h \
     finaledit.h \

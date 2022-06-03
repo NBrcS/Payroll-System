@@ -2,6 +2,8 @@
 #define FINALEDIT_H
 
 #include <QDialog>
+#include "empresa.h"
+
 
 namespace Ui {
 class finaledit;

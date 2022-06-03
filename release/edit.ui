@@ -30,417 +30,9 @@
   </property>
   <property name="palette">
    <palette>
-    <active>
-     <colorrole role="WindowText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Button">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>85</green>
-        <blue>127</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Light">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>127</red>
-        <green>127</green>
-        <blue>190</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Midlight">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>106</red>
-        <green>106</green>
-        <blue>158</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Dark">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>42</green>
-        <blue>63</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Mid">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>57</red>
-        <green>57</green>
-        <blue>85</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Text">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="BrightText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ButtonText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Base">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Window">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>35</red>
-        <green>35</green>
-        <blue>52</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Shadow">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="AlternateBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>42</green>
-        <blue>63</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>220</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-    </active>
-    <inactive>
-     <colorrole role="WindowText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>208</red>
-        <green>208</green>
-        <blue>208</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Button">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>64</red>
-        <green>65</green>
-        <blue>66</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Light">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Midlight">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>227</red>
-        <green>227</green>
-        <blue>227</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Dark">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>64</red>
-        <green>65</green>
-        <blue>66</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Mid">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>160</red>
-        <green>160</green>
-        <blue>160</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Text">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>208</red>
-        <green>208</green>
-        <blue>208</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="BrightText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>51</green>
-        <blue>51</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ButtonText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>208</red>
-        <green>208</green>
-        <blue>208</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Base">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>46</red>
-        <green>47</green>
-        <blue>48</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Window">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>46</red>
-        <green>47</green>
-        <blue>48</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Shadow">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>105</red>
-        <green>105</green>
-        <blue>105</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="AlternateBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>53</red>
-        <green>54</green>
-        <blue>55</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>64</red>
-        <green>65</green>
-        <blue>66</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>208</red>
-        <green>208</green>
-        <blue>208</blue>
-       </color>
-      </brush>
-     </colorrole>
-    </inactive>
-    <disabled>
-     <colorrole role="WindowText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>42</green>
-        <blue>63</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Button">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>85</green>
-        <blue>127</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Light">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>127</red>
-        <green>127</green>
-        <blue>190</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Midlight">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>106</red>
-        <green>106</green>
-        <blue>158</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Dark">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>42</green>
-        <blue>63</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Mid">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>57</red>
-        <green>57</green>
-        <blue>85</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Text">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>42</green>
-        <blue>63</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="BrightText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ButtonText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>42</green>
-        <blue>63</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Base">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>35</red>
-        <green>35</green>
-        <blue>52</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Window">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>35</red>
-        <green>35</green>
-        <blue>52</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Shadow">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="AlternateBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>53</red>
-        <green>54</green>
-        <blue>55</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>64</red>
-        <green>65</green>
-        <blue>66</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>208</red>
-        <green>208</green>
-        <blue>208</blue>
-       </color>
-      </brush>
-     </colorrole>
-    </disabled>
+    <active/>
+    <inactive/>
+    <disabled/>
    </palette>
   </property>
   <property name="windowTitle">
@@ -448,7 +40,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="1" rowspan="3" colspan="2">
-    <layout class="QVBoxLayout" name="verticalLayout_15">
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="label_filter">
        <property name="sizePolicy">
@@ -482,9 +74,9 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_29">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLabel" name="label_name_5">
+        <widget class="QLabel" name="label_name">
          <property name="font">
           <font>
            <family>Verdana</family>
@@ -499,7 +91,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="edit_name_5">
+        <widget class="QLineEdit" name="edit_name">
          <property name="palette">
           <palette>
            <active>
@@ -929,9 +521,9 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_30">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QLabel" name="label_number_5">
+        <widget class="QLabel" name="label_number">
          <property name="font">
           <font>
            <family>Verdana</family>
@@ -946,7 +538,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="edit_number_5">
+        <widget class="QLineEdit" name="edit_number">
          <property name="palette">
           <palette>
            <active>
@@ -1367,9 +959,9 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_31">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QLabel" name="label_designation_5">
+        <widget class="QLabel" name="label_designation">
          <property name="font">
           <font>
            <family>Verdana</family>
@@ -1384,7 +976,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="edit_designation_5">
+        <widget class="QLineEdit" name="edit_designation">
          <property name="palette">
           <palette>
            <active>
@@ -1805,9 +1397,9 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_32">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QLabel" name="label_adress_5">
+        <widget class="QLabel" name="label_adress">
          <property name="font">
           <font>
            <family>Verdana</family>
@@ -1822,7 +1414,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="edit_adress_5">
+        <widget class="QLineEdit" name="edit_adress">
          <property name="palette">
           <palette>
            <active>
@@ -2243,14 +1835,14 @@
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_16">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_33">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
          <property name="sizeConstraint">
           <enum>QLayout::SetDefaultConstraint</enum>
          </property>
          <item>
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="label">
            <property name="font">
             <font>
              <family>Verdana</family>
@@ -2262,9 +1854,9 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_34">
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
            <item>
-            <spacer name="horizontalSpacer_9">
+            <spacer name="horizontalSpacer_2">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -2277,7 +1869,7 @@
             </spacer>
            </item>
            <item>
-            <layout class="QGridLayout" name="gridLayout_10" rowstretch="0,0,0" columnstretch="2,2" rowminimumheight="0,0,0">
+            <layout class="QGridLayout" name="gridLayout_1" rowstretch="0,0,0" columnstretch="2,2" rowminimumheight="0,0,0">
              <property name="sizeConstraint">
               <enum>QLayout::SetFixedSize</enum>
              </property>
@@ -2288,7 +1880,7 @@
               <number>0</number>
              </property>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_between_5">
+              <widget class="QLabel" name="label_between">
                <property name="font">
                 <font>
                  <family>Verdana</family>
@@ -2303,7 +1895,7 @@
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="edit_day1_5">
+              <widget class="QLineEdit" name="edit_day1">
                <property name="maximumSize">
                 <size>
                  <width>30</width>
@@ -2728,7 +2320,7 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="edit_mon1_5">
+              <widget class="QLineEdit" name="edit_mon1">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -3165,7 +2757,7 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="edit_year1_5">
+              <widget class="QLineEdit" name="edit_year1">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                  <horstretch>0</horstretch>
@@ -3604,7 +3196,7 @@
             </layout>
            </item>
            <item>
-            <layout class="QGridLayout" name="gridLayout_11" rowstretch="0,0,0" columnminimumwidth="0,0,0">
+            <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0" columnminimumwidth="0,0,0">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -3612,7 +3204,7 @@
               <number>2</number>
              </property>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="edit_mon2_5">
+              <widget class="QLineEdit" name="edit_mon2">
                <property name="maximumSize">
                 <size>
                  <width>30</width>
@@ -4037,7 +3629,7 @@
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_and_5">
+              <widget class="QLabel" name="label_and">
                <property name="font">
                 <font>
                  <family>Verdana</family>
@@ -4052,7 +3644,7 @@
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLineEdit" name="edit_day2_5">
+              <widget class="QLineEdit" name="edit_day2">
                <property name="maximumSize">
                 <size>
                  <width>30</width>
@@ -4477,7 +4069,7 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="edit_year2_5">
+              <widget class="QLineEdit" name="edit_year2">
                <property name="maximumSize">
                 <size>
                  <width>30</width>
@@ -4902,7 +4494,7 @@
               </widget>
              </item>
              <item row="1" column="2">
-              <spacer name="horizontalSpacer_10">
+              <spacer name="horizontalSpacer">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -4928,9 +4520,9 @@
     </layout>
    </item>
    <item row="0" column="0" rowspan="4">
-    <layout class="QVBoxLayout" name="verticalLayout_17">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <widget class="QListView" name="listView_5">
+      <widget class="QListWidget" name="listWidget">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -4940,7 +4532,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_35">
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
         <widget class="QPushButton" name="bt_edit">
          <property name="text">
@@ -4949,7 +4541,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="bt_erase_5">
+        <widget class="QPushButton" name="bt_erase">
          <property name="text">
           <string>Apagar</string>
          </property>

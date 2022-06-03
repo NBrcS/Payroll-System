@@ -30,8 +30,19 @@ void financial::on_bt_upSalary_clicked()
     QMessageBox::StandardButton reply = QMessageBox::question(this, "Aumento Salarial", out,
                           QMessageBox::Yes | QMessageBox::No);
     if(reply == QMessageBox::Yes){
-
+        this->data->getEmpresa().aumentoSalarioGeral();
     }
+
+    //listWidget init
+    int size = data->getEmpresa().getVectorSize();
+    for(int i = 0; i < size; i++){
+            QString name = data->getEmpresa().get_Func_com_index(i).getNome();
+            QString designation = data->getEmpresa().get_Func_com_index(i).getDesignacao();
+
+            QString view = designation  + " - " + name;
+            ui->list_nameAndWork->addItem(view);
+    }
+
 }
 
 void financial::on_bt_generatePaymentSheet_clicked()
@@ -40,4 +51,5 @@ void financial::on_bt_generatePaymentSheet_clicked()
     sheet.setModal(true);
     sheet.exec();
 }
+
 

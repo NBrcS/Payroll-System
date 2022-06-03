@@ -700,13 +700,6 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="3">
-      <widget class="QListView" name="listView">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="2">
       <spacer name="verticalSpacer_3">
        <property name="orientation">
@@ -722,6 +715,13 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="1" column="3">
+      <widget class="QListWidget" name="listWidget">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>

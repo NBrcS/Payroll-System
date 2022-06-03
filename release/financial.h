@@ -2,6 +2,9 @@
 #define FINANCIAL_H
 
 #include <QDialog>
+#include "empresa.h"
+#include "data.h"
+
 
 namespace Ui {
 class financial;
@@ -22,6 +25,8 @@ private slots:
 
 private:
     Ui::financial *ui;
+
+    Data *data;
 
 };
 
