@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "data.h"
+#include "signals.h"
 
 namespace Ui {
 class edit;
@@ -27,6 +28,7 @@ private:
     Ui::edit *ui;
     Data* data;
     vector<QString> allLines;
+    Signals* mySignals;
 };
 
 #endif // EDIT_H

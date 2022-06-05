@@ -4534,6 +4534,13 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
+        <widget class="QPushButton" name="bt_exihibition">
+         <property name="text">
+          <string>Exibir</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="bt_edit">
          <property name="text">
           <string>Editar</string>

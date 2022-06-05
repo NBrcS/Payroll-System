@@ -12,23 +12,28 @@ SOURCES += \
     data.cpp \
     edit.cpp \
     empresa.cpp \
+    exihibition.cpp \
     finaledit.cpp \
     financial.cpp \
     main.cpp \
     mainwindow.cpp \
-    paymentsheet.cpp
+    paymentsheet.cpp \
+    signals.cpp
 
 HEADERS += \
     data.h \
     edit.h \
     empresa.h \
+    exihibition.h \
     finaledit.h \
     financial.h \
     mainwindow.h \
-    paymentsheet.h
+    paymentsheet.h \
+    signals.h
 
 FORMS += \
     edit.ui \
+    exihibition.ui \
     finaledit.ui \
     financial.ui \
     mainwindow.ui \

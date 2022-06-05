@@ -2,7 +2,7 @@
 #define FINALEDIT_H
 
 #include <QDialog>
-#include "empresa.h"
+#include "data.h"
 
 
 namespace Ui {
@@ -26,8 +26,20 @@ private slots:
 
     void clear_Morphys();
 
+    void clear_bools();
+
+    void select_func(int);
+
+    void att_list();
+
+    void on_bt_att_clicked();
+
 private:
     Ui::finaledit *ui;
+
+    bool president, director, manager;
+
+    Data* data;
 };
 
 #endif // FINALEDIT_H

@@ -37,8 +37,8 @@ PaymentSheet::PaymentSheet(QWidget *parent) :
     //comboEmployees init
     int size = this->data->getEmpresa().getVectorSize();
     for(int i = 0; i < size; i++){
-            QString name = this->data->getEmpresa().get_Func_com_index(i).getNome();
-            QString designation = this->data->getEmpresa().get_Func_com_index(i).getDesignacao();
+            QString name = this->data->getEmpresa().get_Func_com_index(i)->getNome();
+            QString designation = this->data->getEmpresa().get_Func_com_index(i)->getDesignacao();
 
             QString view = designation  + " - " + name;
             ui->combo_employees->addItem(view);

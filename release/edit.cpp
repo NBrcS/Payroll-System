@@ -2,6 +2,7 @@
 #include "ui_edit.h"
 #include "finaledit.h"
 
+
 edit::edit(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::edit)
@@ -28,9 +29,20 @@ edit::~edit()
 
 void edit::on_bt_edit_clicked()
 {
-    finaledit final;
-    final.setModal(true);
-    final.exec();
+    int index;
+
+    finaledit* final;
+    mySignals->connect(this, SIGNAL( funcionario_selecionado( int index )), final,  SLOT( select_func( int index ) ));
+
+    if(ui->listWidget->currentRow() == 0){
+        index = 0;
+    }
+    else{
+        index = ui->listWidget->currentRow() - 1;
+    }
+
+
+    emit mySignals->funcionario_selecionado(index);
 }
 
 void edit::clear_LineEdits(){
