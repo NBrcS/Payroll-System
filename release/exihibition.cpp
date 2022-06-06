@@ -6,6 +6,8 @@ Exihibition::Exihibition(QWidget *parent) :
     ui(new Ui::Exihibition)
 {
     ui->setupUi(this);
+
+    att_exib();
 }
 
 Exihibition::~Exihibition()
@@ -13,7 +15,7 @@ Exihibition::~Exihibition()
     delete ui;
 }
 
-void Exihibition::att_exib(int index){
+void Exihibition::att_exib(){
 
     QString months[] = {"Janeiro", "Fevereiro", "Março",
                         "Abril", "Maio", "Junho",
@@ -49,4 +51,8 @@ void Exihibition::att_exib(int index){
         out = months[i] + " - R$ " + QString::number(montlhys[i]);
         ui->listWidget->addItem(out);
     }
+}
+
+int Exihibition::getIndex(int index_){
+    index = index_;
 }

@@ -34,10 +34,12 @@ private slots:
 
     void on_bt_att_clicked();
 
+    void on_radio_Operator_toggled(bool checked);
+
 private:
     Ui::finaledit *ui;
 
-    bool president, director, manager;
+    bool president, director, manager, operador;
 
     Data* data;
 };

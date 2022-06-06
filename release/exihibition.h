@@ -16,11 +16,13 @@ public:
     explicit Exihibition(QWidget *parent = nullptr);
     ~Exihibition();
 
-    void att_exib(int);
+    void att_exib();
+    int getIndex(int);
 
 private:
     Ui::Exihibition *ui;
     Data* data;
+    int index;
 
 };
 

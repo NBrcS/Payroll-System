@@ -23,6 +23,8 @@ class Empresa
         double funcionario_mensal(int, int);
         vector<int> funcionarios_achados(vector<string>);
         bool compare_datas(tm, tm);
+        void add_func(Funcionario*);
+        void att_func(Funcionario*, int);
 };
 
 #endif

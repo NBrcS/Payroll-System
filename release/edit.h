@@ -24,6 +24,8 @@ private slots:
 
     void on_bt_search_clicked();
 
+    void on_bt_exihibition_clicked();
+
 private:
     Ui::edit *ui;
     Data* data;

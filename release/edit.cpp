@@ -1,6 +1,7 @@
 #include "edit.h"
 #include "ui_edit.h"
 #include "finaledit.h"
+#include "exihibition.h"
 
 
 edit::edit(QWidget *parent) :
@@ -87,5 +88,24 @@ void edit::on_bt_search_clicked()
         ui->listWidget->addItem(view);
 
     }
+}
+
+
+void edit::on_bt_exihibition_clicked()
+{
+    int index;
+
+    Exihibition* exib;
+    mySignals->connect(this, SIGNAL( funcionario_selecionado( int index )), exib,  SLOT( getIndex( int index_ ) ));
+
+    if(ui->listWidget->currentRow() == 0){
+        index = 0;
+    }
+    else{
+        index = ui->listWidget->currentRow() - 1;
+    }
+
+
+    emit mySignals->funcionario_selecionado(index);
 }
 

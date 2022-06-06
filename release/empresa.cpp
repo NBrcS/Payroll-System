@@ -51,7 +51,7 @@ tm avancarDia(tm& data_inicio)
  *
  */
 int Empresa::getVectorSize(){
-    return this->funcionarios.size();
+    return (int)(this->funcionarios.size());
 }
 
 
@@ -206,5 +206,14 @@ bool Empresa::compare_datas(tm data_inicio, tm data_final){
         return false;
     }
 }
+
+void Empresa::add_func(Funcionario* fun_){
+    funcionarios.push_back(fun_);
+}
+
+void Empresa::att_func(Funcionario* fun, int index){
+    funcionarios[index] = fun;
+}
+
 
 
