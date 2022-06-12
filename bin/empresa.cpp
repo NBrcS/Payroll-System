@@ -79,7 +79,7 @@ double Empresa::empresa_mensal(int index){
 
     bool notExists = (this->folhaSalarial[index] == 0.0);
     if(notExists){
-        for(funcionarios* fun : funcionarios)
+        for(Funcionario* fun : funcionarios)
         {
             this->folhaSalarial[index] += fun->getSalario();
         }
@@ -122,12 +122,12 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros){
     }
 
     bool igual;
-    for(int i = 0; i < funcionarios.size(); i++){
+    for(unsigned long long i = 0; i < funcionarios.size(); i++){
         igual = false;
 
         //nome
         if(existe[0]){
-            if(funcionarios[i].getNome().compare(parametros[0])){
+            if(funcionarios[i]->getNome().compare(parametros[0])){
                 igual = true;
             }
             else{
@@ -137,7 +137,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros){
 
         //endereco
         if(existe[1]){
-            if(funcionarios[i].getEndereco().compare(parametros[1])){
+            if(funcionarios[i]->getEndereco().compare(parametros[1])){
                 igual = true;
             }
             else{
@@ -147,7 +147,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros){
 
         //codigo
         if(existe[2]){
-            if(funcionarios[i].getCodFuncionario().compare(parametros[2])){
+            if(funcionarios[i]->getCodFuncionario().compare(parametros[3])){
                 igual = true;
             }
             else{
@@ -157,7 +157,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros){
 
         //designacao
         if(existe[3]){
-            if(funcionarios[i].getDesignacao().compare(parametros[3])){
+            if(funcionarios[i]->getDesignacao().compare(parametros[3])){
                 igual = true;
             }
             else{
@@ -179,7 +179,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros){
 
             igual = false;
             while(!compare_datas(data_inicio, data_fim)){
-                if(funcionarios[i]->compare_datas(data_inicio)){
+                if(funcionarios[i]->ComparaDatas(data_inicio)){
                     igual = true;
                     break;
                 }
@@ -215,5 +215,10 @@ void Empresa::att_func(Funcionario* fun, int index){
     funcionarios[index] = fun;
 }
 
+void Empresa::aumentoSalarioGeral(){
+    for(unsigned long long i = 0; i < funcionarios.size(); i++){
+        funcionarios[i]->aumentoSalarial();
+    }
+}
 
 

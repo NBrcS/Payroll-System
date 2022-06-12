@@ -1,14 +1,21 @@
 #include "finaledit.h"
+
+#include "diretor.h"
+#include "gerente.h"
+#include "operador.h"
+#include "presidente.h"
+
 #include "ui_finaledit.h"
 #include <QModelIndex>
 #include <ctime>
 
-finaledit::finaledit(QWidget *parent) :
+finaledit::finaledit(QWidget *parent, Data* data_) :
     QDialog(parent),
     ui(new Ui::finaledit)
 {
     ui->setupUi(this);
 
+    data = data_;
     att_list();
 }
 
@@ -124,21 +131,46 @@ void finaledit::on_bt_att_clicked()
         QString supervision = ui->lineEdit_morphy1->text();
         QString degreeArea =  ui->lineEdit_morphy2->text();
 
-        funcionario = new Diretor( /* PRECISO COLOCAR OS PARAMETROS!!!  */ );
+        funcionario = new Diretor( supervision.toStdString(),
+                                   degreeArea.toStdString(),
+                                   code.toStdString(),
+                                   name.toStdString(),
+                                   adress.toStdString(),
+                                   phone.toStdString(),
+                                   designation.toStdString(),
+                                   date, salary);
     }
     else if(president){
         QString academicFormation = ui->lineEdit_morphy2->text();
         QString degreeArea =  ui->lineEdit_morphy1->text();
 
-        funcionario = new Presidente( /* PRECISO COLOCAR OS PARAMETROS!!!  */ );
+        funcionario = new Presidente( degreeArea.toStdString(),
+                                      academicFormation.toStdString(),
+                                      code.toStdString(),
+                                      name.toStdString(),
+                                      adress.toStdString(),
+                                      phone.toStdString(),
+                                      designation.toStdString(),
+                                      date,  salary);
     }
     else if(manager){
         QString supervision = ui->lineEdit_morphy1->text();
 
-        funcionario = new Gerente( /* PRECISO COLOCAR OS PARAMETROS!!!  */ );
+        funcionario = new Gerente(supervision.toStdString(),
+                                  code.toStdString(),
+                                  name.toStdString(),
+                                  adress.toStdString(),
+                                  phone.toStdString(),
+                                  designation.toStdString(),
+                                  date,  salary);
     }
     else if(operador){
-        funcionario = new Operador( /* PRECISO COLOCAR OS PARAMETROS!!!  */ );
+        funcionario = new Operador( code.toStdString(),
+                                    name.toStdString(),
+                                    adress.toStdString(),
+                                    phone.toStdString(),
+                                    designation.toStdString(),
+                                    date,  salary);
     }
 
 
@@ -164,8 +196,8 @@ void finaledit::att_list()
     ui->listWidget_infoExihibiton->addItem("");
     int size = data->getEmpresa().getVectorSize();
     for(int i = 0; i < size; i++){
-            name = data->getEmpresa().get_Func_com_index(i).getNome();
-            designation = data->getEmpresa().get_Func_com_index(i).getDesignacao();
+            name = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getNome());
+            designation = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getDesignacao());
 
             view = designation  + " - " + name;
             ui->listWidget_infoExihibiton->addItem(view);

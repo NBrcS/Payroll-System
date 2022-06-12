@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "data.h"
+#include <ctime>
 
 namespace Ui {
 class Exihibition;

@@ -14,8 +14,8 @@ edit::edit(QWidget *parent, Data* data_) :
     //listWidget init
     int size = data->getEmpresa().getVectorSize();
     for(int i = 0; i < size; i++){
-            QString name = data->getEmpresa().get_Func_com_index(i).getNome();
-            QString number = data->getEmpresa().get_Func_com_index(i).getCodFuncionario();
+            QString name = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getNome());
+            QString number = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getCodFuncionario());
 
             QString view = number + " - " + name;
             ui->listWidget->addItem(view);
@@ -33,7 +33,7 @@ void edit::on_bt_edit_clicked()
 {
     int index;
 
-    finaledit* final;
+    finaledit* final = new finaledit();
     mySignals->connect(this, SIGNAL( funcionario_selecionado( int index )), final,  SLOT( select_func( int index ) ));
 
     if(ui->listWidget->currentRow() == 0){
@@ -82,8 +82,8 @@ void edit::on_bt_search_clicked()
 
     ui->listWidget->clear();
     for(int index : achados){
-        QString name = data->getEmpresa().get_Func_com_index(index).getNome();
-        QString number = data->getEmpresa().get_Func_com_index(index).getCodFuncionario();
+        QString name = QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getNome());
+        QString number = QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getCodFuncionario());
 
         QString view = number + " - " + name;
         ui->listWidget->addItem(view);
@@ -96,7 +96,7 @@ void edit::on_bt_exihibition_clicked()
 {
     int index;
 
-    Exihibition* exib;
+    Exihibition* exib = new Exihibition();
     mySignals->connect(this, SIGNAL( funcionario_selecionado( int index )), exib,  SLOT( getIndex( int index_ ) ));
 
     if(ui->listWidget->currentRow() == 0){

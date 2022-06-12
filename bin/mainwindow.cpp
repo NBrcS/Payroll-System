@@ -25,10 +25,10 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //listWidget init
-    int size = data->getEmpresa().getVectorSize();
+    int size = data.getEmpresa().getVectorSize();
     for(int i = 0; i < size; i++){
-            QString name = data->getEmpresa().get_Func_com_index(i).getNome();
-            QString number = data->getEmpresa().get_Func_com_index(i).getCodFuncionario();
+            QString name = QString::fromStdString(data.getEmpresa().get_Func_com_index(i)->getNome());
+            QString number = QString::fromStdString(data.getEmpresa().get_Func_com_index(i)->getCodFuncionario());
 
             QString view = number + " - " + name;
             ui->listWidget->addItem(view);
@@ -44,7 +44,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_bt_edit_clicked()
 {
-    edit_form = new edit(this, data);
+    edit_form = new edit(this, &data);
     edit_form->show();
 
 }
@@ -52,7 +52,7 @@ void MainWindow::on_bt_edit_clicked()
 
 void MainWindow::on_bt_financial_clicked()
 {
-    financial_form = new financial(this, data);
+    financial_form = new financial(this, &data);
     financial_form->show();
 }
 
@@ -71,7 +71,7 @@ void MainWindow::on_bt_credits_clicked()
 
 void MainWindow::on_bt_add_clicked()
 {
-    final = new finaledit(this, data);
+    final = new finaledit(this, &data);
     final->show();
 }
 

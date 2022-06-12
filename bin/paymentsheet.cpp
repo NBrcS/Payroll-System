@@ -38,8 +38,8 @@ PaymentSheet::PaymentSheet(QWidget *parent, Data* data_) :
     //comboEmployees init
     int size = this->data->getEmpresa().getVectorSize();
     for(int i = 0; i < size; i++){
-            QString name = this->data->getEmpresa().get_Func_com_index(i)->getNome();
-            QString designation = this->data->getEmpresa().get_Func_com_index(i)->getDesignacao();
+            QString name = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(i)->getNome());
+            QString designation = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(i)->getDesignacao());
 
             QString view = designation  + " - " + name;
             ui->combo_employees->addItem(view);
@@ -134,8 +134,8 @@ void PaymentSheet::on_bt_calcule_clicked()
 
         int vectorSize = this->data->getEmpresa().getVectorSize();
         for(int i = 0; i < vectorSize; i++){
-            name = this->data->getEmpresa().get_Func_com_index(i)->getNome();
-            designation = this->data->getEmpresa().get_Func_com_index(i)->getDesignacao();
+            name = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(i)->getNome());
+            designation = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(i)->getDesignacao());
             salary = QString::number(this->data->getEmpresa().get_Func_com_index(i)->getSalario());
 
             out += designation + ": " + name + " - R$ " + salary + "\n";
@@ -151,7 +151,7 @@ void PaymentSheet::on_bt_calcule_clicked()
         int employeeIndex = ui->combo_employees->currentIndex()-1;
         vector<double> valores = this->data->getEmpresa().funcionario_anual(employeeIndex);
 
-        name = this->data->getEmpresa().get_Func_com_index(employeeIndex).getNome();
+        name = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(employeeIndex)->getNome());
         out = "Relatório anual de " + name + ":\n\n";
 
 
@@ -173,15 +173,15 @@ void PaymentSheet::on_bt_calcule_clicked()
         int employee_index = ui->combo_employees->currentIndex()-1;
         int month_index = ui->combo_months->currentIndex()-1;
 
-        name = this->data->getEmpresa().get_Func_com_index(employee_index).getName();
-        sal_number = this->data->getEmpresa().get_Func_com_index(employee_index).getSalario();
+        name = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(employee_index)->getNome());
+        sal_number = this->data->getEmpresa().get_Func_com_index(employee_index)->getSalario();
         sal_str = QString::number(sal_number);
         sal_daily_number = sal_number / 30;
         sal_daily_str = QString::number(sal_daily_number);
-        number = this->data->getEmpresa().get_Func_com_index(employee_index).getCodFuncionario();
-        worked_days_number = this->data->getEmpresa().get_Func_com_index(employee_index).getDiasTrabalhados();
+        number = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(employee_index)->getCodFuncionario());
+        worked_days_number = this->data->getEmpresa().get_Func_com_index(employee_index)->getDiasTrabalhados(month_index);
         worked_days_str = QString::number(worked_days_number);
-        extra_hours_number = this->data->getEmpresa().get_Func_com_index(employee_index).getHorasExtras();
+        extra_hours_number = this->data->getEmpresa().get_Func_com_index(employee_index)->getHorasExtras(month_index);
         extra_hours_str = QString::number(extra_hours_number);
 
         out = "Relatório mensal de " + name + ": \n\n";

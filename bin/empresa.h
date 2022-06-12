@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <iostream>
+#include "funcionario.h"
+
 using namespace std;
 
 class Empresa
@@ -25,6 +27,7 @@ class Empresa
         bool compare_datas(tm, tm);
         void add_func(Funcionario*);
         void att_func(Funcionario*, int);
+        void aumentoSalarioGeral();
 };
 
 #endif

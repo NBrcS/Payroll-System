@@ -10,25 +10,35 @@ CONFIG += c++17
 
 SOURCES += \
     data.cpp \
+    diretor.cpp \
     edit.cpp \
     empresa.cpp \
     exihibition.cpp \
     finaledit.cpp \
     financial.cpp \
+    funcionario.cpp \
+    gerente.cpp \
     main.cpp \
     mainwindow.cpp \
+    operador.cpp \
     paymentsheet.cpp \
+    presidente.cpp \
     signals.cpp
 
 HEADERS += \
     data.h \
+    diretor.h \
     edit.h \
     empresa.h \
     exihibition.h \
     finaledit.h \
     financial.h \
+    funcionario.h \
+    gerente.h \
     mainwindow.h \
+    operador.h \
     paymentsheet.h \
+    presidente.h \
     signals.h
 
 FORMS += \

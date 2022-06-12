@@ -26,20 +26,20 @@ void Exihibition::att_exib(){
 
 
     //labels att
-    ui->label_name->setText(data->getEmpresa().get_Func_com_index(index)->getNome());
-    ui->label_code->setText(data->getEmpresa().get_Func_com_index(index)->getCodFuncionario());
-    ui->label_phoneNumber->setText(data->getEmpresa().get_Func_com_index(index)->getTelefone());
-    ui->label_adress->setText(data->getEmpresa().get_Func_com_index(index)->getEndereco());
-    ui->label_designation->setText(data->getEmpresa().get_Func_com_index(index)->getDesignacao());
+    ui->label_name->setText(QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getNome()));
+    ui->label_code->setText(QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getCodFuncionario()));
+    ui->label_phoneNumber->setText(QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getTelefone()));
+    ui->label_adress->setText(QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getEndereco()));
+    ui->label_designation->setText(QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getDesignacao()));
 
-    QString salary = "R$ " + data->getEmpresa().get_Func_com_index(index)->getSalario();
+    QString salary = "R$ " + QString::number(data->getEmpresa().get_Func_com_index(index)->getSalario());
     ui->label_Salary->setText(salary);
 
-    QString date = data->getEmpresa().get_Func_com_index(index)->getDataIngresso().mday +
+    QString date = QString::number(data->getEmpresa().get_Func_com_index(index)->getDataIngresso().tm_mday) +
                     "/" +
-                   data->getEmpresa().get_Func_com_index(index)->getDataIngresso().mon +
+                   QString::number(data->getEmpresa().get_Func_com_index(index)->getDataIngresso().tm_mon) +
                     "/" +
-                    data->getEmpresa().get_Func_com_index(index)->getDataIngresso().year;
+                    QString::number(data->getEmpresa().get_Func_com_index(index)->getDataIngresso().tm_year);
     ui->label_date->setText(date);
 
 
