@@ -4,7 +4,10 @@
 #include <QMainWindow>
 #include "edit.h"
 #include "financial.h"
-
+#include "data.h"
+#include "finaledit.h"
+#include "signals.h"
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,8 +35,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
     edit *edit_form;
-    financial *financial_form;
+    financial* financial_form;
+    finaledit* final;
 
     QString feedback;
+    Data data;
+    Signals *mySignal;
 };
 #endif // MAINWINDOW_H
