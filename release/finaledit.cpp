@@ -75,7 +75,8 @@ void finaledit::on_radio_President_toggled(bool checked)
     this->president = true;
 }
 
-void finaledit::clear_Morphys(){
+void finaledit::clear_Morphys()
+{
 
     ui->label_morphy1->setText("");
     ui->label_morphy2->setText("");
@@ -83,7 +84,8 @@ void finaledit::clear_Morphys(){
     ui->lineEdit_morphy2->setEnabled(false);
 }
 
-void finaledit::clear_bools(){
+void finaledit::clear_bools()
+{
     president = false;
     director = false;
     manager = false;
@@ -150,11 +152,13 @@ void finaledit::on_bt_att_clicked()
     att_list();
 }
 
-void finaledit::select_func(int index){
+void finaledit::select_func(int index)
+{
     ui->listWidget_infoExihibiton->setCurrentRow(index);
 }
 
-void finaledit::att_list(){
+void finaledit::att_list()
+{
     QString name, designation, view;
 
     ui->listWidget_infoExihibiton->addItem("");
@@ -166,6 +170,12 @@ void finaledit::att_list(){
             view = designation  + " - " + name;
             ui->listWidget_infoExihibiton->addItem(view);
     }
+}
+
+
+void finaledit::receber_dados(Data& data_)
+{
+    data = &data_;
 }
 
 

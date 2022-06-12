@@ -14,7 +14,7 @@ class edit : public QDialog
     Q_OBJECT
 
 public:
-    explicit edit(QWidget *parent = nullptr);
+    explicit edit(QWidget *parent = nullptr, Data* data_ = nullptr);
     ~edit();
 
     void clear_LineEdits();
@@ -25,6 +25,8 @@ private slots:
     void on_bt_search_clicked();
 
     void on_bt_exihibition_clicked();
+
+    void receber_dados(Data&);
 
 private:
     Ui::edit *ui;

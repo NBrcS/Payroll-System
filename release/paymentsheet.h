@@ -13,7 +13,7 @@ class PaymentSheet : public QDialog
     Q_OBJECT
 
 public:
-    explicit PaymentSheet(QWidget *parent = nullptr);
+    explicit PaymentSheet(QWidget *parent = nullptr, Data* data_ = nullptr);
     ~PaymentSheet();
 
 private slots:

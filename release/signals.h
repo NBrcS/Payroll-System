@@ -2,6 +2,7 @@
 #define SIGNALS_H
 
 #include <QObject>
+#include "data.h"
 
 class Signals : public QObject
 {
@@ -11,7 +12,7 @@ public:
 
 signals:
     void funcionario_selecionado( int );
-
+    void passar_dados( Data& );
 };
 
 #endif // SIGNALS_H

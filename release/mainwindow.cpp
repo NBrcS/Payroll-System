@@ -1,8 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "finaledit.h"
-#include <qmessagebox.h>
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -47,14 +44,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_bt_edit_clicked()
 {
-    edit_form = new edit();
+    edit_form = new edit(this, data);
     edit_form->show();
+
 }
 
 
 void MainWindow::on_bt_financial_clicked()
 {
-    financial_form = new financial();
+    financial_form = new financial(this, data);
     financial_form->show();
 }
 
@@ -73,8 +71,8 @@ void MainWindow::on_bt_credits_clicked()
 
 void MainWindow::on_bt_add_clicked()
 {
-    finaledit final;
-    final.setModal(true);
-    final.exec();
+    final = new finaledit(this, data);
+    final->show();
 }
+
 

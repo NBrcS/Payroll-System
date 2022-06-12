@@ -1,13 +1,12 @@
 #include "financial.h"
 #include "ui_financial.h"
-#include "paymentsheet.h"
-#include <qmessagebox.h>
 
-financial::financial(QWidget *parent) :
+financial::financial(QWidget *parent, Data* data_) :
     QDialog(parent),
     ui(new Ui::financial)
 {
     ui->setupUi(this);
+    data = data_;
 }
 
 financial::~financial()
@@ -47,9 +46,12 @@ void financial::on_bt_upSalary_clicked()
 
 void financial::on_bt_generatePaymentSheet_clicked()
 {
-    PaymentSheet sheet;
-    sheet.setModal(true);
-    sheet.exec();
+    sheet = new PaymentSheet(this, data);
+    sheet->show();
+}
+
+void financial::receber_dados(Data& data_){
+    data = &data_;
 }
 
 

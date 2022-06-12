@@ -14,7 +14,7 @@ class finaledit : public QDialog
     Q_OBJECT
 
 public:
-    explicit finaledit(QWidget *parent = nullptr);
+    explicit finaledit(QWidget *parent = nullptr, Data* data_ = nullptr);
     ~finaledit();
 
 private slots:
@@ -35,6 +35,8 @@ private slots:
     void on_bt_att_clicked();
 
     void on_radio_Operator_toggled(bool checked);
+
+    void receber_dados(Data&);
 
 private:
     Ui::finaledit *ui;

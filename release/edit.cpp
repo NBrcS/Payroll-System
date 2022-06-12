@@ -4,11 +4,12 @@
 #include "exihibition.h"
 
 
-edit::edit(QWidget *parent) :
+edit::edit(QWidget *parent, Data* data_) :
     QDialog(parent),
     ui(new Ui::edit)
 {
     ui->setupUi(this);
+    data = data_;
 
     //listWidget init
     int size = data->getEmpresa().getVectorSize();
@@ -107,5 +108,9 @@ void edit::on_bt_exihibition_clicked()
 
 
     emit mySignals->funcionario_selecionado(index);
+}
+
+void edit::receber_dados(Data& data_){
+    data = &data_;
 }
 

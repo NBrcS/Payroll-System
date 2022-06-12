@@ -1,11 +1,12 @@
 #include "exihibition.h"
 #include "ui_exihibition.h"
 
-Exihibition::Exihibition(QWidget *parent) :
+Exihibition::Exihibition(QWidget *parent, Data* data_) :
     QDialog(parent),
     ui(new Ui::Exihibition)
 {
     ui->setupUi(this);
+    data = data_;
 
     att_exib();
 }
@@ -54,5 +55,10 @@ void Exihibition::att_exib(){
 }
 
 int Exihibition::getIndex(int index_){
-    index = index_;
+    return index = index_;
 }
+
+void Exihibition::receber_dados(Data& data_){
+    data = &data_;
+}
+

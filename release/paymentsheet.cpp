@@ -3,11 +3,12 @@
 
 
 
-PaymentSheet::PaymentSheet(QWidget *parent) :
+PaymentSheet::PaymentSheet(QWidget *parent, Data* data_) :
     QDialog(parent),
     ui(new Ui::PaymentSheet)
 {
     ui->setupUi(this);
+    data = data_;
 
     bool radio1_isToggled = ui->radio_business->isChecked();
     bool radio2_isToggled = ui->radio_employee->isChecked();
