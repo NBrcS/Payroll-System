@@ -121,7 +121,7 @@ void finaledit::on_bt_att_clicked()
 {
 
     bool selected;
-    if(ui->listWidget_infoExihibiton->currentRow() == 0){
+    if(ui->listWidget_infoExihibiton->currentRow() <= 0){
         selected = false;
     }
     else{
@@ -222,7 +222,7 @@ void finaledit::att_list()
             name = QString::fromStdString(empresa.get_Func_com_index(i)->getNome());
             designation = QString::fromStdString(empresa.get_Func_com_index(i)->getDesignacao());
 
-            view = designation  + " - " + name;
+            view = name + " - " + designation;
             ui->listWidget_infoExihibiton->addItem(view);
     }
 }

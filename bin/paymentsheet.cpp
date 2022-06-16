@@ -109,8 +109,11 @@ void PaymentSheet::on_radio_montlhy_toggled(bool checked)
 
 void PaymentSheet::on_bt_calcule_clicked()
 {
-    double totalFinal;
+    double totalFinal = 0.0;
     QString out;
+
+    ui->label_info->setText("");
+    ui->label_finalValue->setText("R$");
 
     //business anual
     if(radio1_isToggled && radio3_isToggled){
