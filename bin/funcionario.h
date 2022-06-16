@@ -20,13 +20,19 @@ class Funcionario{
         void setDesignacao(string designacao);
         void setDataIngresso(tm dataIngresso);
         void setSalario(double salario);
+        void setSalario_tributado(double newSalario_tributado);
+        void setValor_hora(double newValor_hora);
         string getCodFuncionario();
         string getNome();
         string getEndereco();
         string getTelefone();
         string getDesignacao();
         tm getDataIngresso();
-        double getSalario();
+        double getSalario();      
+        double getSalario_tributado() const;
+        double getValor_hora() const;
+
+
 
         bool ComparaDatas(tm data);
         void tributarSalario();
@@ -35,7 +41,8 @@ class Funcionario{
         int getHorasExtras(int index);
         virtual void aumentoSalarial() = 0;
 
-    protected:
+
+protected:
         string codFuncionario;
         string nome;
         string endereco;

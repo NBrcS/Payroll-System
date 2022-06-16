@@ -41,10 +41,10 @@ Funcionario::Funcionario(string nome, string endereco, string telefone, string d
     tributarSalario();
 
     double salario_mensal;
-    valor_hora = (salario_tributado / 30) / 24;
+    valor_hora = (salario_tributado / 25) / 24;
     for(int i = 0; i < 12; i++){
         horasTrabalhadas[i] = rand() % 20;
-        diasTrabalhados[i] = rand() % 30;
+        diasTrabalhados[i] = rand() % 25;
 
         salario_mensal = diasTrabalhados[i] * (valor_hora * 8)
                          + horasTrabalhadas[i] * (valor_hora * 1.5);
@@ -52,7 +52,7 @@ Funcionario::Funcionario(string nome, string endereco, string telefone, string d
         salariosMensais[i] = salario_mensal;
     }
 
-    int cod = (rand() % 1000 + 1000);
+    int cod = (rand() % 1000 + 8999);
     this->codFuncionario = to_string(cod);
 }
 
@@ -147,4 +147,24 @@ int Funcionario::getDiasTrabalhados(int index)
 int Funcionario::getHorasExtras(int index)
 {
     return horasTrabalhadas[index];
+}
+
+double Funcionario::getValor_hora() const
+{
+    return valor_hora;
+}
+
+void Funcionario::setValor_hora(double newValor_hora)
+{
+    valor_hora = newValor_hora;
+}
+
+double Funcionario::getSalario_tributado() const
+{
+    return salario_tributado;
+}
+
+void Funcionario::setSalario_tributado(double newSalario_tributado)
+{
+    salario_tributado = newSalario_tributado;
 }

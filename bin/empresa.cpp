@@ -60,9 +60,7 @@ tm avancarDia(tm& data_inicio)
  */
 int Empresa::getVectorSize()
 {
-    qDebug() << "tamanho do vector: " << (int)funcionarios.size();
     return funcionarios.size();
-
 }
 
 /*
@@ -109,9 +107,9 @@ double Empresa::empresa_mensal(int index)
 
     bool notExists = (this->folhaSalarial[index] == 0.0);
     if(notExists){
-        for(Funcionario* fun : funcionarios)
+        for(int i = 0; i < funcionarios.size(); i++)
         {
-            this->folhaSalarial[index] += fun->getSalario();
+            this->folhaSalarial[index] += funcionarios[i]->get_SalarioMes(index);
         }
     }
 
@@ -277,7 +275,6 @@ bool Empresa::compare_datas(tm data_inicio, tm data_final)
 void Empresa::add_func(Funcionario* fun_)
 {
     this->funcionarios.push_back(fun_);
-    qDebug() << &funcionarios[0];
 }
 
 
