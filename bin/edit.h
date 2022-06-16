@@ -2,7 +2,7 @@
 #define EDIT_H
 
 #include <QDialog>
-#include "data.h"
+#include "empresa.h"
 #include "signals.h"
 
 namespace Ui {
@@ -14,7 +14,7 @@ class edit : public QDialog
     Q_OBJECT
 
 public:
-    explicit edit(QWidget *parent = nullptr, Data* data_ = nullptr);
+    explicit edit(QWidget *parent = nullptr, Empresa empresa_ = Empresa());
     ~edit();
 
     void clear_LineEdits();
@@ -26,11 +26,13 @@ private slots:
 
     void on_bt_exihibition_clicked();
 
-    void receber_dados(Data&);
+    void receber_dados(Empresa&);
+
+    void att_list();
 
 private:
     Ui::edit *ui;
-    Data* data;
+    Empresa empresa;
     vector<QString> allLines;
     Signals* mySignals;
 };

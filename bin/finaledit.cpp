@@ -9,13 +9,27 @@
 #include <QModelIndex>
 #include <ctime>
 
-finaledit::finaledit(QWidget *parent, Data* data_) :
+finaledit::finaledit(QWidget *parent, Empresa empresa_) :
     QDialog(parent),
     ui(new Ui::finaledit)
 {
     ui->setupUi(this);
 
-    data = data_;
+    empresa = empresa_;
+
+    ui->listWidget_infoExihibiton->addItem("teste");
+
+
+    ui->lineEdit_Name->setText("José Bonifácio");
+    ui->lineEdit_PhoneNumber->setText("(87) 9.9972-0857");
+    ui->lineEdit_Adress->setText("rua Dom José Pereira Alves");
+    ui->lineEdit_Salary->setText("1000");
+    ui->lineEdit_Day->setText("02");
+    ui->lineEdit_Mon->setText("10");
+    ui->lineEdit_Year->setText("2002");
+
+
+    ui->radio_Operator->setChecked(true);
     att_list();
 }
 
@@ -33,6 +47,7 @@ void finaledit::on_radio_Operator_toggled(bool checked)
 
     clear_bools();
     this->operador = true;
+    this->designation = "Operador";
 }
 
 void finaledit::on_radio_Manager_toggled(bool checked)
@@ -47,6 +62,7 @@ void finaledit::on_radio_Manager_toggled(bool checked)
 
     clear_bools();
     this->manager = true;
+    this->designation = "Gerente";
 }
 
 
@@ -64,6 +80,7 @@ void finaledit::on_radio_Director_toggled(bool checked)
 
     clear_bools();
     this->director = true;
+    this->designation = "Diretor";
 }
 
 void finaledit::on_radio_President_toggled(bool checked)
@@ -80,6 +97,7 @@ void finaledit::on_radio_President_toggled(bool checked)
 
     clear_bools();
     this->president = true;
+    this->designation = "Presidente";
 }
 
 void finaledit::clear_Morphys()
@@ -100,7 +118,7 @@ void finaledit::clear_bools()
 }
 
 void finaledit::on_bt_att_clicked()
-{   
+{
 
     bool selected;
     if(ui->listWidget_infoExihibiton->currentRow() == 0){
@@ -113,11 +131,9 @@ void finaledit::on_bt_att_clicked()
     Funcionario* funcionario;
 
     QString name = ui->lineEdit_Name->text();
-    QString code = ui->lineEdit_Code->text();
     QString phone = ui->lineEdit_PhoneNumber->text();
     QString adress = ui->lineEdit_Adress->text();
     double salary = ui->lineEdit_Salary->text().toDouble();
-    QString designation = ui->lineEdit_Designation->text();
     int day = ui->lineEdit_Day->text().toInt();
     int mon = ui->lineEdit_Mon->text().toInt();
     int year = ui->lineEdit_Year->text().toInt();
@@ -133,7 +149,6 @@ void finaledit::on_bt_att_clicked()
 
         funcionario = new Diretor( supervision.toStdString(),
                                    degreeArea.toStdString(),
-                                   code.toStdString(),
                                    name.toStdString(),
                                    adress.toStdString(),
                                    phone.toStdString(),
@@ -146,7 +161,6 @@ void finaledit::on_bt_att_clicked()
 
         funcionario = new Presidente( degreeArea.toStdString(),
                                       academicFormation.toStdString(),
-                                      code.toStdString(),
                                       name.toStdString(),
                                       adress.toStdString(),
                                       phone.toStdString(),
@@ -156,17 +170,15 @@ void finaledit::on_bt_att_clicked()
     else if(manager){
         QString supervision = ui->lineEdit_morphy1->text();
 
-        funcionario = new Gerente(supervision.toStdString(),
-                                  code.toStdString(),
-                                  name.toStdString(),
-                                  adress.toStdString(),
-                                  phone.toStdString(),
-                                  designation.toStdString(),
-                                  date,  salary);
+        funcionario = new Gerente( supervision.toStdString(),
+                                   name.toStdString(),
+                                   adress.toStdString(),
+                                   phone.toStdString(),
+                                   designation.toStdString(),
+                                   date,  salary);
     }
     else if(operador){
-        funcionario = new Operador( code.toStdString(),
-                                    name.toStdString(),
+        funcionario = new Operador( name.toStdString(),
                                     adress.toStdString(),
                                     phone.toStdString(),
                                     designation.toStdString(),
@@ -175,13 +187,23 @@ void finaledit::on_bt_att_clicked()
 
 
     if(selected == false){
-        data->getEmpresa().add_func(funcionario);
+        empresa.add_func(funcionario);
     }
     else{
         int index = ui->listWidget_infoExihibiton->currentRow() - 1;
-        data->getEmpresa().att_func(funcionario, index);
+        empresa.att_func(funcionario, index);
     }
     att_list();
+
+    ui->lineEdit_Name->setText("");
+    ui->lineEdit_PhoneNumber->setText("");
+    ui->lineEdit_Adress->setText("");
+    ui->lineEdit_Salary->setText("");
+    ui->lineEdit_Day->setText("");
+    ui->lineEdit_Mon->setText("");
+    ui->lineEdit_Year->setText("");
+    ui->lineEdit_morphy1->setText("");
+    ui->lineEdit_morphy2->setText("");
 }
 
 void finaledit::select_func(int index)
@@ -193,11 +215,12 @@ void finaledit::att_list()
 {
     QString name, designation, view;
 
-    ui->listWidget_infoExihibiton->addItem("");
-    int size = data->getEmpresa().getVectorSize();
+    ui->listWidget_infoExihibiton->clear();
+
+    int size = empresa.getVectorSize();
     for(int i = 0; i < size; i++){
-            name = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getNome());
-            designation = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getDesignacao());
+            name = QString::fromStdString(empresa.get_Func_com_index(i)->getNome());
+            designation = QString::fromStdString(empresa.get_Func_com_index(i)->getDesignacao());
 
             view = designation  + " - " + name;
             ui->listWidget_infoExihibiton->addItem(view);
@@ -205,9 +228,10 @@ void finaledit::att_list()
 }
 
 
-void finaledit::receber_dados(Data& data_)
+void finaledit::receber_dados(Empresa& data_)
 {
-    data = &data_;
+    Empresa *p_data = &data_;
+    empresa = *p_data;
 }
 
 

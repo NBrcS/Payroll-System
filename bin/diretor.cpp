@@ -3,8 +3,8 @@
 Diretor::Diretor() : Funcionario(3){
 
 }
-Diretor::Diretor(string areaSupervisao, string areaFormacao, string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario)
-    : Funcionario(codFuncionario, nome, endereco, telefone, designacao, dataIngresso, salario){
+Diretor::Diretor(string areaSupervisao, string areaFormacao, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario)
+    : Funcionario(nome, endereco, telefone, designacao, dataIngresso, salario){
     this->areaSupervisao = areaSupervisao;
     this->areaFormacao = areaFormacao;
 }

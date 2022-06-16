@@ -2,7 +2,7 @@
 #define PAYMENTSHEET_H
 
 #include <QDialog>
-#include "data.h"
+#include "empresa.h"
 
 namespace Ui {
 class PaymentSheet;
@@ -13,7 +13,7 @@ class PaymentSheet : public QDialog
     Q_OBJECT
 
 public:
-    explicit PaymentSheet(QWidget *parent = nullptr, Data* data_ = nullptr);
+    explicit PaymentSheet(QWidget *parent = nullptr, Empresa empresa_ = Empresa());
     ~PaymentSheet();
 
 private slots:
@@ -37,7 +37,7 @@ private:
     bool radio4_isToggled;
 
     vector<QString> monthsVec;
-    Data* data;
+    Empresa empresa;
 };
 
 #endif // PAYMENTSHEET_H

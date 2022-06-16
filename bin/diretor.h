@@ -8,7 +8,7 @@ class Diretor : public Funcionario{
     public:
 
         Diretor();
-        Diretor(string areaSupervisao, string areaFormacao, string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario);
+        Diretor(string areaSupervisao, string areaFormacao, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario);
         virtual ~Diretor(){}
 
         void setAreaSupervisao(string areaSupervisao);

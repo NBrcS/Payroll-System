@@ -10,7 +10,7 @@ class Funcionario{
 
     public:
         Funcionario(int = 0);
-        Funcionario(string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario);
+        explicit Funcionario(string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario);
         virtual ~Funcionario(){}
 
         void setCodFuncionario(string CodFuncionario);

@@ -3,12 +3,12 @@
 
 
 
-PaymentSheet::PaymentSheet(QWidget *parent, Data* data_) :
+PaymentSheet::PaymentSheet(QWidget *parent, Empresa empresa_) :
     QDialog(parent),
     ui(new Ui::PaymentSheet)
 {
     ui->setupUi(this);
-    data = data_;
+    empresa = empresa_;
 
     bool radio1_isToggled = ui->radio_business->isChecked();
     bool radio2_isToggled = ui->radio_employee->isChecked();
@@ -36,10 +36,10 @@ PaymentSheet::PaymentSheet(QWidget *parent, Data* data_) :
     }
 
     //comboEmployees init
-    int size = this->data->getEmpresa().getVectorSize();
+    int size = this->empresa.getVectorSize();
     for(int i = 0; i < size; i++){
-            QString name = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(i)->getNome());
-            QString designation = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(i)->getDesignacao());
+            QString name = QString::fromStdString(this->empresa.get_Func_com_index(i)->getNome());
+            QString designation = QString::fromStdString(this->empresa.get_Func_com_index(i)->getDesignacao());
 
             QString view = designation  + " - " + name;
             ui->combo_employees->addItem(view);
@@ -114,7 +114,7 @@ void PaymentSheet::on_bt_calcule_clicked()
 
     //business anual
     if(radio1_isToggled && radio3_isToggled){
-        vector<double> valores = data->getEmpresa().empresa_anual();
+        vector<double> valores = empresa.empresa_anual();
 
         out = "Relatório anual: \n\n";
 
@@ -132,16 +132,16 @@ void PaymentSheet::on_bt_calcule_clicked()
         out = "Relatório mensal: \n\n";
         QString name, salary, designation;
 
-        int vectorSize = this->data->getEmpresa().getVectorSize();
+        int vectorSize = this->empresa.getVectorSize();
         for(int i = 0; i < vectorSize; i++){
-            name = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(i)->getNome());
-            designation = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(i)->getDesignacao());
-            salary = QString::number(this->data->getEmpresa().get_Func_com_index(i)->getSalario());
+            name = QString::fromStdString(this->empresa.get_Func_com_index(i)->getNome());
+            designation = QString::fromStdString(this->empresa.get_Func_com_index(i)->getDesignacao());
+            salary = QString::number(this->empresa.get_Func_com_index(i)->getSalario());
 
             out += designation + ": " + name + " - R$ " + salary + "\n";
         }
 
-        totalFinal = this->data->getEmpresa().empresa_mensal(selectedMonth);
+        totalFinal = this->empresa.empresa_mensal(selectedMonth);
     }
 
     //Employee anual
@@ -149,9 +149,9 @@ void PaymentSheet::on_bt_calcule_clicked()
         QString salary, name;
 
         int employeeIndex = ui->combo_employees->currentIndex()-1;
-        vector<double> valores = this->data->getEmpresa().funcionario_anual(employeeIndex);
+        vector<double> valores = this->empresa.funcionario_anual(employeeIndex);
 
-        name = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(employeeIndex)->getNome());
+        name = QString::fromStdString(this->empresa.get_Func_com_index(employeeIndex)->getNome());
         out = "Relatório anual de " + name + ":\n\n";
 
 
@@ -173,15 +173,15 @@ void PaymentSheet::on_bt_calcule_clicked()
         int employee_index = ui->combo_employees->currentIndex()-1;
         int month_index = ui->combo_months->currentIndex()-1;
 
-        name = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(employee_index)->getNome());
-        sal_number = this->data->getEmpresa().get_Func_com_index(employee_index)->getSalario();
+        name = QString::fromStdString(this->empresa.get_Func_com_index(employee_index)->getNome());
+        sal_number = this->empresa.get_Func_com_index(employee_index)->getSalario();
         sal_str = QString::number(sal_number);
         sal_daily_number = sal_number / 30;
         sal_daily_str = QString::number(sal_daily_number);
-        number = QString::fromStdString(this->data->getEmpresa().get_Func_com_index(employee_index)->getCodFuncionario());
-        worked_days_number = this->data->getEmpresa().get_Func_com_index(employee_index)->getDiasTrabalhados(month_index);
+        number = QString::fromStdString(this->empresa.get_Func_com_index(employee_index)->getCodFuncionario());
+        worked_days_number = this->empresa.get_Func_com_index(employee_index)->getDiasTrabalhados(month_index);
         worked_days_str = QString::number(worked_days_number);
-        extra_hours_number = this->data->getEmpresa().get_Func_com_index(employee_index)->getHorasExtras(month_index);
+        extra_hours_number = this->empresa.get_Func_com_index(employee_index)->getHorasExtras(month_index);
         extra_hours_str = QString::number(extra_hours_number);
 
         out = "Relatório mensal de " + name + ": \n\n";

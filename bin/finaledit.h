@@ -2,7 +2,7 @@
 #define FINALEDIT_H
 
 #include <QDialog>
-#include "data.h"
+#include "empresa.h"
 
 
 namespace Ui {
@@ -14,7 +14,7 @@ class finaledit : public QDialog
     Q_OBJECT
 
 public:
-    explicit finaledit(QWidget *parent = nullptr, Data* data_ = nullptr);
+    explicit finaledit(QWidget *parent = nullptr, Empresa Empresa_ = Empresa());
     ~finaledit();
 
 private slots:
@@ -36,14 +36,15 @@ private slots:
 
     void on_radio_Operator_toggled(bool checked);
 
-    void receber_dados(Data&);
+    void receber_dados(Empresa&);
 
 private:
     Ui::finaledit *ui;
 
     bool president, director, manager, operador;
+    QString designation;
 
-    Data* data;
+    Empresa empresa;
 };
 
 #endif // FINALEDIT_H

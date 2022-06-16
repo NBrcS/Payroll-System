@@ -1,6 +1,7 @@
 #include "funcionario.h"
 #include <ctime>
 #include <cstdlib>
+#include <QDebug>
 
 Funcionario::Funcionario(int t){
     switch(t){
@@ -28,8 +29,7 @@ Funcionario::Funcionario(int t){
             break;
     }
 }
-Funcionario::Funcionario(string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario){
-    this->codFuncionario = codFuncionario;
+Funcionario::Funcionario(string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario){
     this->nome = nome;
     this->endereco = endereco;
     this->telefone = telefone;
@@ -43,7 +43,7 @@ Funcionario::Funcionario(string codFuncionario, string nome, string endereco, st
     double salario_mensal;
     valor_hora = (salario_tributado / 30) / 24;
     for(int i = 0; i < 12; i++){
-        horasTrabalhadas[i] = rand() % 90;
+        horasTrabalhadas[i] = rand() % 20;
         diasTrabalhados[i] = rand() % 30;
 
         salario_mensal = diasTrabalhados[i] * (valor_hora * 8)
@@ -51,6 +51,9 @@ Funcionario::Funcionario(string codFuncionario, string nome, string endereco, st
 
         salariosMensais[i] = salario_mensal;
     }
+
+    int cod = (rand() % 1000 + 1000);
+    this->codFuncionario = to_string(cod);
 }
 
 void Funcionario::setCodFuncionario(string CodFuncionario){

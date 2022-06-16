@@ -4,23 +4,13 @@
 #include "exihibition.h"
 
 
-edit::edit(QWidget *parent, Data* data_) :
+edit::edit(QWidget *parent, Empresa empresa_) :
     QDialog(parent),
     ui(new Ui::edit)
 {
     ui->setupUi(this);
-    data = data_;
-
-    //listWidget init
-    int size = data->getEmpresa().getVectorSize();
-    for(int i = 0; i < size; i++){
-            QString name = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getNome());
-            QString number = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getCodFuncionario());
-
-            QString view = number + " - " + name;
-            ui->listWidget->addItem(view);
-    }
-
+    empresa = empresa_;
+    att_list();
     clear_LineEdits();
 }
 
@@ -45,6 +35,9 @@ void edit::on_bt_edit_clicked()
 
 
     emit mySignals->funcionario_selecionado(index);
+    final->show();
+    att_list();
+
 }
 
 void edit::clear_LineEdits(){
@@ -78,12 +71,12 @@ void edit::on_bt_search_clicked()
         str_parametros.push_back(str.toStdString());
     }
 
-    vector<int> achados = this->data->getEmpresa().funcionarios_achados(str_parametros);
+    vector<int> achados = this->empresa.funcionarios_achados(str_parametros);
 
     ui->listWidget->clear();
     for(int index : achados){
-        QString name = QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getNome());
-        QString number = QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getCodFuncionario());
+        QString name = QString::fromStdString(empresa.get_Func_com_index(index)->getNome());
+        QString number = QString::fromStdString(empresa.get_Func_com_index(index)->getCodFuncionario());
 
         QString view = number + " - " + name;
         ui->listWidget->addItem(view);
@@ -106,11 +99,31 @@ void edit::on_bt_exihibition_clicked()
         index = ui->listWidget->currentRow() - 1;
     }
 
-
     emit mySignals->funcionario_selecionado(index);
+
+    exib->show();
+    att_list();
 }
 
-void edit::receber_dados(Data& data_){
-    data = &data_;
+void edit::att_list()
+{
+    QString name, designation, view;
+
+    ui->listWidget->clear();
+
+    int size = empresa.getVectorSize();
+    for(int i = 0; i < size; i++){
+            QString name = QString::fromStdString(empresa.get_Func_com_index(i)->getNome());
+            QString number = QString::fromStdString(empresa.get_Func_com_index(i)->getCodFuncionario());
+
+            QString view = number + " - " + name;
+            ui->listWidget->addItem(view);
+    }
+
+}
+
+void edit::receber_dados(Empresa& empresa_){
+    Empresa* p_data = &empresa_;
+    empresa = *p_data;
 }
 

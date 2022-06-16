@@ -1,7 +1,7 @@
 #ifndef EMPRESA_H
 #define EMPRESA_H
 
-#include <vector>
+#include <QVector>
 #include <iostream>
 #include "funcionario.h"
 
@@ -10,7 +10,7 @@ using namespace std;
 class Empresa
 {
     private:
-        vector<Funcionario*> funcionarios;
+        QVector<Funcionario*> funcionarios;
         double folhaSalarial[12];
 
     public:
