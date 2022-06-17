@@ -14,7 +14,7 @@ class finaledit : public QDialog
     Q_OBJECT
 
 public:
-    explicit finaledit(QWidget *parent = nullptr, Empresa Empresa_ = Empresa());
+    explicit finaledit(QWidget *parent = nullptr, Empresa Empresa_ = Empresa(), int index = 0);
     ~finaledit();
 
 private slots:
@@ -45,6 +45,7 @@ private:
     QString designation;
 
     Empresa empresa;
+    int index;
 };
 
 #endif // FINALEDIT_H

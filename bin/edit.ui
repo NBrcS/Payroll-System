@@ -447,7 +447,7 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1" rowspan="3" colspan="2">
+   <item row="0" column="1" rowspan="3" colspan="3">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="label_filter">
@@ -4927,6 +4927,25 @@
      </item>
     </layout>
    </item>
+   <item row="3" column="3">
+    <widget class="QPushButton" name="pushButton">
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Verdana</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Limpar</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0" rowspan="4">
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
@@ -4966,8 +4985,14 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="1" colspan="2">
+   <item row="3" column="2">
     <widget class="QPushButton" name="bt_search">
+     <property name="maximumSize">
+      <size>
+       <width>100</width>
+       <height>30</height>
+      </size>
+     </property>
      <property name="font">
       <font>
        <family>Verdana</family>

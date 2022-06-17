@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "empresa.h"
 #include "signals.h"
+#include <QMessageBox>
 
 namespace Ui {
 class edit;
@@ -29,6 +30,10 @@ private slots:
     void receber_dados(Empresa&);
 
     void att_list();
+
+    void on_pushButton_clicked();
+
+    void on_bt_erase_clicked();
 
 private:
     Ui::edit *ui;

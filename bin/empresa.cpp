@@ -155,103 +155,126 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
 {
     vector<bool> existe;
     vector<int> achados;
+    bool achou_um = false;
 
     for(const string &str : parametros)
     {
-        if(str.compare(""))
-        {
-            existe.push_back(false);
-        }
-        else
-        {
-            existe.push_back(true);
-        }
+        if(str.compare("")) existe.push_back(true);
+        else existe.push_back(false);
     }
 
-    bool igual;
-    for(int i = 0; i < funcionarios.size(); i++)
+    bool todos_vazios = true;
+    for(bool b : existe)
     {
-        igual = false;
+        if(b) todos_vazios = false;
+        achou_um = true;
+    }
 
-        //nome
-        if(existe[0]){
-            if(funcionarios[i]->getNome().compare(parametros[0]))
-            {
-                igual = true;
-            }
-            else{
-                igual = false;
-            }
-        }
-
-        //endereco
-        if(existe[1]){
-            if(funcionarios[i]->getEndereco().compare(parametros[1]))
-            {
-                igual = true;
-            }
-            else
-            {
-                igual = false;
-            }
-        }
-
-        //codigo
-        if(existe[2]){
-            if(funcionarios[i]->getCodFuncionario().compare(parametros[3]))
-            {
-                igual = true;
-            }
-            else
-            {
-                igual = false;
-            }
-        }
-
-        //designacao
-        if(existe[3]){
-            if(funcionarios[i]->getDesignacao().compare(parametros[3]))
-            {
-                igual = true;
-            }
-            else
-            {
-                igual = false;
-            }
-        }
-
-        //data
-        if((existe[4] && existe[5] && existe[6]) && (existe[7] && existe[8] && existe[9]))
-        {
-            tm data_inicio, data_fim;
-
-            data_inicio.tm_mday = stoi(parametros[4]);
-            data_inicio.tm_mon = stoi(parametros[5]);
-            data_inicio.tm_year = stoi(parametros[6]);
-
-            data_fim.tm_mday = stoi(parametros[7]);
-            data_fim.tm_mon = stoi(parametros[8]);
-            data_fim.tm_year = stoi(parametros[9]);
-
-            igual = false;
-            while(!compare_datas(data_inicio, data_fim))
-            {
-                if(funcionarios[i]->ComparaDatas(data_inicio))
-                {
-                    igual = true;
-                    break;
-                }
-                avancarDia(data_inicio);
-            }
-        }
-
-        if(igual)
+    if(todos_vazios)
+    {
+        for(int i = 0; i < funcionarios.size(); i++)
         {
             achados.push_back(i);
         }
     }
+    else
+    {
+        bool igual;
+        for(int i = 0; i < funcionarios.size(); i++)
+        {
+            igual = false;
 
-    return achados;
+            //nome
+            if(existe[0]){
+                if(funcionarios[i]->getNome().compare(parametros[0]))
+                {
+                    igual = false;
+                }
+                else igual = true;
+
+            }
+
+            //endereco
+            if(existe[1]){
+                if(funcionarios[i]->getEndereco().compare(parametros[1]))
+                {
+                    igual = false;
+                }
+                else igual = true;
+
+            }
+
+            //codigo
+            if(existe[2]){
+                if(funcionarios[i]->getCodFuncionario().compare(parametros[2]))
+                {
+                    igual = false;
+                }
+                else igual = true;
+
+            }
+
+            //designacao
+            if(existe[3]){
+                if(funcionarios[i]->getDesignacao().compare(parametros[3]))
+                {
+                    igual = false;
+                }
+                else igual = true;
+
+            }
+
+            //data
+            if((existe[4] && existe[5] && existe[6]) && (existe[7] && existe[8] && existe[9]))
+            {
+                if((stoi(parametros[4]) > 28 && stoi(parametros[5]) == 02 ) ||
+                    (stoi(parametros[7]) > 28 && stoi(parametros[8]) == 02 ))
+                {
+                    throw ("Fevereiro não pode ter mais que 28 dias");
+                }
+
+
+                tm data_inicio, data_fim;
+
+                data_inicio.tm_mday = stoi(parametros[4]);
+                data_inicio.tm_mon = stoi(parametros[5]);
+                data_inicio.tm_year = stoi(parametros[6]);
+
+                data_fim.tm_mday = stoi(parametros[7]);
+                data_fim.tm_mon = stoi(parametros[8]);
+                data_fim.tm_year = stoi(parametros[9]);
+
+                igual = false;
+                while(!compare_datas(data_inicio, data_fim))
+                {
+                    if(funcionarios[i]->ComparaDatas(data_inicio))
+                    {
+                        igual = true;
+                        break;
+                    }
+                    avancarDia(data_inicio);
+                }
+            }
+
+            if(igual)
+            {
+                achados.push_back(i);
+                achou_um = true;
+            }
+        }
+    }
+
+    if(!achou_um)
+    {
+        throw ("Não foi encontrado um funcionário com estes parametros");
+    }
+    else
+    {
+        return achados;
+    }
+
+    existe.clear();
+    achados.clear();
 }
 
 
@@ -301,3 +324,8 @@ void Empresa::aumentoSalarioGeral()
         funcionarios[i]->aumentoSalarial();
     }
 }
+
+void Empresa::apagar_funcionario(int index){
+    this->funcionarios.erase(funcionarios.begin() + index);
+}
+

@@ -4,6 +4,7 @@
 #include <QVector>
 #include <iostream>
 #include "funcionario.h"
+#include <exception>
 
 using namespace std;
 
@@ -28,6 +29,7 @@ class Empresa
         void add_func(Funcionario*);
         void att_func(Funcionario*, int);
         void aumentoSalarioGeral();
+        void apagar_funcionario(int);
 };
 
 #endif

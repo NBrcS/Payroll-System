@@ -39,8 +39,8 @@ class Funcionario{
         double get_SalarioMes(int index);
         int getDiasTrabalhados(int index);
         int getHorasExtras(int index);
-        virtual void aumentoSalarial() = 0;
 
+        virtual void aumentoSalarial() = 0;
 
 protected:
         string codFuncionario;

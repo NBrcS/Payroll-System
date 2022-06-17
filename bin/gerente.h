@@ -13,7 +13,7 @@ class Gerente : public Funcionario{
         void setAreaSupervisao(string AreaSupervisao);
         string getAreaSupervisao();
 
-           void aumentoSalarial();
+        void aumentoSalarial();
     private:
         string areaSupervisao;
 

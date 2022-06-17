@@ -1,12 +1,13 @@
 #include "exihibition.h"
 #include "ui_exihibition.h"
 
-Exihibition::Exihibition(QWidget *parent, Empresa empresa_) :
+Exihibition::Exihibition(QWidget *parent, Empresa empresa_, int index_) :
     QDialog(parent),
     ui(new Ui::Exihibition)
 {
     ui->setupUi(this);
     empresa = empresa_;
+    index = index_;
 
     att_exib();
 }
@@ -47,11 +48,14 @@ void Exihibition::att_exib(){
     vector<double> montlhys = empresa.funcionario_anual(index);
     QString out;
 
-    ui->listWidget->addItem("Mensal\n\n");
-    for(unsigned long long i = 0; i < montlhys.size(); i++){
+    ui->listWidget->addItem("Mensal\n");
+    for(unsigned long long i = 0; i < 12; i++){
         out = months[i] + " - R$ " + QString::number(montlhys[i]);
         ui->listWidget->addItem(out);
     }
+
+    out = "Total - " + QString::number(montlhys[12]);
+    ui->listWidget->addItem(out);
 }
 
 int Exihibition::getIndex(int index_){

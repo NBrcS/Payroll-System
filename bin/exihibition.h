@@ -14,7 +14,7 @@ class Exihibition : public QDialog
     Q_OBJECT
 
 public:
-    explicit Exihibition(QWidget *parent = nullptr, Empresa Empresa_ = Empresa());
+    explicit Exihibition(QWidget *parent = nullptr, Empresa Empresa_ = Empresa(), int index = 0);
     ~Exihibition();
 
     void att_exib();

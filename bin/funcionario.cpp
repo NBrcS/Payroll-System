@@ -52,7 +52,7 @@ Funcionario::Funcionario(string nome, string endereco, string telefone, string d
         salariosMensais[i] = salario_mensal;
     }
 
-    int cod = (rand() % 1000 + 8999);
+    int cod = (rand() % 1000 + 1000);
     this->codFuncionario = to_string(cod);
 }
 
