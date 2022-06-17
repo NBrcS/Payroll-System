@@ -212,14 +212,26 @@ void finaledit::on_bt_att_clicked()
                                     date,  salary);
     }
 
+    bool existe = false;
+    string nome_str = name.toStdString();
+    for(int i = 0; i < empresa.getVectorSize(); i++)
+    {
+        if(nome_str.compare(empresa.get_Func_com_index(i)->getNome()) == 0 ) existe = true;
+    }
 
-    if(selected == false){
-        empresa.add_func(funcionario);
+    if(!existe){
+        if(selected == false){
+            empresa.add_func(funcionario);
+        }
+        else{
+            int index = ui->listWidget_infoExihibiton->currentRow() - 1;
+            empresa.att_func(funcionario, index);
+        }
     }
     else{
-        int index = ui->listWidget_infoExihibiton->currentRow() - 1;
-        empresa.att_func(funcionario, index);
+        QMessageBox::critical(this, "ERRO", "Este funcionário já está cadastrado no sistema");
     }
+
     att_list();
 
     ui->lineEdit_Name->setText("");
@@ -231,6 +243,11 @@ void finaledit::on_bt_att_clicked()
     ui->lineEdit_Year->setText("");
     ui->lineEdit_morphy1->setText("");
     ui->lineEdit_morphy2->setText("");
+
+    ui->radio_Operator->setChecked(false);
+    ui->radio_Manager->setChecked(false);
+    ui->radio_Director->setChecked(false);
+    ui->radio_President->setChecked(false);
 }
 
 void finaledit::select_func(int index)
@@ -246,11 +263,11 @@ void finaledit::att_list()
 
     int size = empresa.getVectorSize();
     for(int i = 0; i < size; i++){
-            name = QString::fromStdString(empresa.get_Func_com_index(i)->getNome());
-            designation = QString::fromStdString(empresa.get_Func_com_index(i)->getDesignacao());
+        name = QString::fromStdString(empresa.get_Func_com_index(i)->getNome());
+        designation = QString::fromStdString(empresa.get_Func_com_index(i)->getDesignacao());
 
-            view = name + " - " + designation;
-            ui->listWidget_infoExihibiton->addItem(view);
+        view = name + " - " + designation;
+        ui->listWidget_infoExihibiton->addItem(view);
     }
 }
 
