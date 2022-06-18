@@ -39,7 +39,9 @@ private slots:
 
     void on_radio_Operator_toggled(bool checked);
 
-    void on_listWidget_infoExihibiton_currentRowChanged(int currentItem);
+    void on_listWidget_infoExihibiton_currentRowChanged(int index);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::finaledit *ui;

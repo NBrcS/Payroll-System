@@ -24,87 +24,7 @@ finaledit::finaledit(QWidget *parent, Empresa *empresa_, int index_) :
     ui->lineEdit_Year->setValidator( new QIntValidator(1940, 2100, this) );
     ui->lineEdit_Salary->setValidator( new QIntValidator(0, 100000000, this) );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ui->listWidget_infoExihibiton->setCurrentRow(index+1);
-    QString name = QString::fromStdString(this->empresa->get_Func_com_index(index)->getNome());
-    ui->lineEdit_Name->setText(name);
-    QString ph = QString::fromStdString(this->empresa->get_Func_com_index(index)->getTelefone());
-    ui->lineEdit_PhoneNumber->setText(ph);
-    QString adress = QString::fromStdString(this->empresa->get_Func_com_index(index)->getEndereco());
-    ui->lineEdit_Adress->setText(adress);
-    QString sal = QString::number(this->empresa->get_Func_com_index(index)->getSalario());
-    ui->lineEdit_Salary->setText(sal);
-    QString day = QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_mday);
-    ui->lineEdit_Day->setText(day);
-    QString mon = QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_mon);
-    ui->lineEdit_Mon->setText(mon);
-    QString year = QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_year);
-    ui->lineEdit_Year->setText(year);
-
-    string designacao = this->empresa->get_Func_com_index(index)->getDesignacao();
-    if(designacao.compare("Operador") == 0){
-        ui->radio_Operator->setChecked(true);
-        on_radio_Operator_toggled(true);
-
-    } else if(designacao.compare("Gerente") == 0){
-        ui->radio_Manager->setChecked(true);
-        on_radio_Manager_toggled(true);
-        ui->lineEdit_morphy1->setText(QString::fromStdString(( (Gerente*) this->empresa->get_Func_com_index(index))->getAreaSupervisao()));
-
-    }
-    else if(designacao.compare("Diretor") == 0){
-        ui->radio_Director->setChecked(true);
-        on_radio_Director_toggled(true);
-        ui->lineEdit_morphy1->setText(QString::fromStdString(( (Diretor*) this->empresa->get_Func_com_index(index))->getAreaSupervisao()));
-        ui->lineEdit_morphy2->setText(QString::fromStdString(( (Diretor*) this->empresa->get_Func_com_index(index))->getAreaFormacao()));
-
-    } else if(designacao.compare("Presidente") == 0){
-        ui->radio_President->setChecked(true);
-        on_radio_President_toggled(true);
-        ui->lineEdit_morphy2->setText(QString::fromStdString(( (Presidente*) this->empresa->get_Func_com_index(index))->getAreaFormacao()));
-        ui->lineEdit_morphy1->setText(QString::fromStdString(( (Presidente*) this->empresa->get_Func_com_index(index))->getFormacaoMaxima()));
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    on_listWidget_infoExihibiton_currentRowChanged(index);
     att_list();
 }
 
@@ -273,15 +193,24 @@ void finaledit::on_bt_att_clicked()
     }
 
     if(!existe){
-        if(name.compare("") != 0 &&
-           phone.compare("") != 0 &&
-           adress.compare("") != 0 &&
-           salary < 0 && day < 0 &&
-           mon < 0 && year < 0) empresa->add_func(funcionario);
+        bool a = name.compare("") != 0;
+        bool b = phone.compare("") != 0;
+        bool c = adress.compare("") != 0;
+        bool d = salary > 0;
+        bool e = day > 0;
+        bool f = mon > 0;
+        bool g = year > 0;
+
+        if(a && b && c && d && e && f && g ){
+            empresa->add_func(funcionario);
+            QMessageBox::information(this, "SUCESSO", "Funcionario adicionado com sucesso");
+
+        }
         else QMessageBox::critical(this, "ERRO", "Existe algum parametro vazio");
 
     }else if(existe && selected){
         empresa->att_func(funcionario, index);
+        QMessageBox::information(this, "SUCESSO", "Funcionario atualizado com sucesso");
 
     }else if(existe && !selected){
         QMessageBox::critical(this, "ERRO", "Este funcionário já está cadastrado no sistema");
@@ -302,8 +231,6 @@ void finaledit::att_list()
 
     ui->listWidget_infoExihibiton->clear();
 
-
-    ui->listWidget_infoExihibiton->addItem("Adicionar\n\n");
     int size = empresa->getVectorSize();
     for(int i = 0; i < size; i++){
         name = QString::fromStdString(empresa->get_Func_com_index(i)->getNome());
@@ -314,28 +241,20 @@ void finaledit::att_list()
     }
 }
 
-void finaledit::on_listWidget_infoExihibiton_currentRowChanged(int currentItem)
+void finaledit::on_listWidget_infoExihibiton_currentRowChanged(int index)
 {
     clear_all_edits();
-    int index = currentItem - 1;
 
     if(index >= 0)
     {
         ui->listWidget_infoExihibiton->setCurrentRow(index);
-        QString name = QString::fromStdString(this->empresa->get_Func_com_index(index)->getNome());
-        ui->lineEdit_Name->setText(name);
-        QString ph = QString::fromStdString(this->empresa->get_Func_com_index(index)->getTelefone());
-        ui->lineEdit_PhoneNumber->setText(ph);
-        QString adress = QString::fromStdString(this->empresa->get_Func_com_index(index)->getEndereco());
-        ui->lineEdit_Adress->setText(adress);
-        QString sal = QString::number(this->empresa->get_Func_com_index(index)->getSalario());
-        ui->lineEdit_Salary->setText(sal);
-        QString day = QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_mday);
-        ui->lineEdit_Day->setText(day);
-        QString mon = QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_mon);
-        ui->lineEdit_Mon->setText(mon);
-        QString year = QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_year);
-        ui->lineEdit_Year->setText(year);
+        ui->lineEdit_Name->setText( QString::fromStdString(this->empresa->get_Func_com_index(index)->getNome()));
+        ui->lineEdit_PhoneNumber->setText(QString::fromStdString(this->empresa->get_Func_com_index(index)->getTelefone()));
+        ui->lineEdit_Adress->setText(QString::fromStdString(this->empresa->get_Func_com_index(index)->getEndereco()));
+        ui->lineEdit_Salary->setText(QString::number(this->empresa->get_Func_com_index(index)->getSalario()));
+        ui->lineEdit_Day->setText(QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_mday));
+        ui->lineEdit_Mon->setText(QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_mon));
+        ui->lineEdit_Year->setText(QString::number(this->empresa->get_Func_com_index(index)->getDataIngresso().tm_year));
 
         string designacao = this->empresa->get_Func_com_index(index)->getDesignacao();
         if(designacao.compare("Operador") == 0){
@@ -343,12 +262,11 @@ void finaledit::on_listWidget_infoExihibiton_currentRowChanged(int currentItem)
             on_radio_Operator_toggled(true);
 
         } else if(designacao.compare("Gerente") == 0){
-
             ui->radio_Manager->setChecked(true);
             on_radio_Manager_toggled(true);
             ui->lineEdit_morphy1->setText(QString::fromStdString(( (Gerente*) this->empresa->get_Func_com_index(index))->getAreaSupervisao()));
-        }
-        else if(designacao.compare("Diretor") == 0){
+
+        } else if(designacao.compare("Diretor") == 0){
             ui->radio_Director->setChecked(true);
             on_radio_Director_toggled(true);
             ui->lineEdit_morphy1->setText(QString::fromStdString(( (Diretor*) this->empresa->get_Func_com_index(index))->getAreaSupervisao()));
@@ -379,4 +297,10 @@ void finaledit::clear_all_edits()
     clear_bools();
 }
 
+
+
+void finaledit::on_pushButton_clicked()
+{
+    clear_all_edits();
+}
 
