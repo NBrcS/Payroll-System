@@ -3,8 +3,8 @@
 Gerente::Gerente() : Funcionario(2){
 
 }
-Gerente::Gerente(string areaSupervisao, string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario)
-    : Funcionario(codFuncionario, nome, endereco, telefone, designacao, dataIngresso, salario){
+Gerente::Gerente(string areaSupervisao, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario)
+    : Funcionario(nome, endereco, telefone, designacao, dataIngresso, salario){
     this->areaSupervisao = areaSupervisao;
 }
 void Gerente::setAreaSupervisao(string areaSupervisao){

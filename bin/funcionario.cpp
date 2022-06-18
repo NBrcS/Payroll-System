@@ -1,6 +1,7 @@
 #include "funcionario.h"
 #include <ctime>
 #include <cstdlib>
+#include <QDebug>
 
 Funcionario::Funcionario(int t){
     switch(t){
@@ -28,8 +29,7 @@ Funcionario::Funcionario(int t){
             break;
     }
 }
-Funcionario::Funcionario(string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario){
-    this->codFuncionario = codFuncionario;
+Funcionario::Funcionario(string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario){
     this->nome = nome;
     this->endereco = endereco;
     this->telefone = telefone;
@@ -41,16 +41,19 @@ Funcionario::Funcionario(string codFuncionario, string nome, string endereco, st
     tributarSalario();
 
     double salario_mensal;
-    valor_hora = (salario_tributado / 30) / 24;
+    valor_hora = (salario_tributado / 25) / 24;
     for(int i = 0; i < 12; i++){
-        horasTrabalhadas[i] = rand() % 90;
-        diasTrabalhados[i] = rand() % 30;
+        horasTrabalhadas[i] = rand() % 20;
+        diasTrabalhados[i] = rand() % 25;
 
         salario_mensal = diasTrabalhados[i] * (valor_hora * 8)
                          + horasTrabalhadas[i] * (valor_hora * 1.5);
 
         salariosMensais[i] = salario_mensal;
     }
+
+    int cod = (rand() % 1000 + 1000);
+    this->codFuncionario = to_string(cod);
 }
 
 void Funcionario::setCodFuncionario(string CodFuncionario){
@@ -115,8 +118,19 @@ bool Funcionario::ComparaDatas(tm data){
 
 void Funcionario::tributarSalario()
 {
-    double parte_previdencia = salario * (20/100);
+    double parte_previdencia = 0.0;
     double parte_IR;
+
+
+    if(salario < 1212){
+        parte_previdencia = salario * (7.5/100);
+    }else if(salario >= 1212.01 && salario <= 2427.35){
+        parte_previdencia = salario * (9.0/100);
+    }else if(salario >= 2427.36 && salario <= 3641.03){
+        parte_previdencia = salario * (12.0/1000);
+    }else{
+        parte_previdencia = salario * (14.0/100);
+    }
 
     if(salario < 1903.98){
         parte_IR = 0;
@@ -144,4 +158,24 @@ int Funcionario::getDiasTrabalhados(int index)
 int Funcionario::getHorasExtras(int index)
 {
     return horasTrabalhadas[index];
+}
+
+double Funcionario::getValor_hora() const
+{
+    return valor_hora;
+}
+
+void Funcionario::setValor_hora(double newValor_hora)
+{
+    valor_hora = newValor_hora;
+}
+
+double Funcionario::getSalario_tributado() const
+{
+    return salario_tributado;
+}
+
+void Funcionario::setSalario_tributado(double newSalario_tributado)
+{
+    salario_tributado = newSalario_tributado;
 }

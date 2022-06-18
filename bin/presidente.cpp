@@ -3,8 +3,8 @@
 Presidente::Presidente() : Funcionario(4){
 
 }
-Presidente::Presidente(string areaFormacao, string formacaoMaxima, string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario)
-    : Funcionario(codFuncionario, nome, endereco, telefone, designacao, dataIngresso, salario){
+Presidente::Presidente(string areaFormacao, string formacaoMaxima, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario)
+    : Funcionario(nome, endereco, telefone, designacao, dataIngresso, salario){
     this->areaFormacao = areaFormacao;
     this->formacaoMaxima = formacaoMaxima;
 }

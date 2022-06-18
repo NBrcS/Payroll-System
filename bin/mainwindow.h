@@ -32,6 +32,8 @@ private slots:
 
     void on_bt_add_clicked();
 
+    void att_list();
+
 private:
     Ui::MainWindow *ui;
     edit *edit_form;
@@ -39,7 +41,7 @@ private:
     finaledit* final;
 
     QString feedback;
-    Data data;
+    Empresa empresa;
     Signals *mySignal;
 };
 #endif // MAINWINDOW_H

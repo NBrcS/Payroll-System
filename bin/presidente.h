@@ -8,7 +8,7 @@ class Presidente : public Funcionario{
     public:
 
         Presidente();
-        Presidente(string areaFormacao, string formacaoMaxima, string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario);
+        Presidente(string areaFormacao, string formacaoMaxima, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario);
         virtual ~Presidente(){}
 
         void setAreaFormacao(string AreaFormacao);

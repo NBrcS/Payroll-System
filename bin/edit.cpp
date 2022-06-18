@@ -4,24 +4,23 @@
 #include "exihibition.h"
 
 
-edit::edit(QWidget *parent, Data* data_) :
+edit::edit(QWidget *parent, Empresa *empresa_) :
     QDialog(parent),
     ui(new Ui::edit)
 {
     ui->setupUi(this);
-    data = data_;
+    empresa = empresa_;
 
-    //listWidget init
-    int size = data->getEmpresa().getVectorSize();
-    for(int i = 0; i < size; i++){
-            QString name = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getNome());
-            QString number = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getCodFuncionario());
+    ui->edit_day1->setValidator( new QIntValidator(0, 31, this) );
+    ui->edit_mon1->setValidator( new QIntValidator(0, 12, this) );
+    ui->edit_year1->setValidator( new QIntValidator(1940, 2100, this) );
+    ui->edit_day2->setValidator( new QIntValidator(0, 31, this) );
+    ui->edit_mon2->setValidator( new QIntValidator(0, 12, this) );
+    ui->edit_year2->setValidator( new QIntValidator(1940, 2100, this) );
 
-            QString view = number + " - " + name;
-            ui->listWidget->addItem(view);
-    }
-
+    att_list();
     clear_LineEdits();
+
 }
 
 edit::~edit()
@@ -32,19 +31,20 @@ edit::~edit()
 void edit::on_bt_edit_clicked()
 {
     int index;
+    index = ui->listWidget->currentRow();
 
-    finaledit* final = new finaledit();
-    mySignals->connect(this, SIGNAL( funcionario_selecionado( int index )), final,  SLOT( select_func( int index ) ));
-
-    if(ui->listWidget->currentRow() == 0){
-        index = 0;
+    if(index < 0)
+    {
+        QMessageBox::critical(this, "ERRO", "Nenhum funcionario selecionado");
+        return;
     }
-    else{
-        index = ui->listWidget->currentRow() - 1;
+    else
+    {
+        finaledit* final = new finaledit(this, empresa, index);
+        final->show();
     }
 
-
-    emit mySignals->funcionario_selecionado(index);
+    att_list();
 }
 
 void edit::clear_LineEdits(){
@@ -62,55 +62,113 @@ void edit::clear_LineEdits(){
 
 void edit::on_bt_search_clicked()
 {
-    allLines.push_back(ui->edit_name->text());
-    allLines.push_back(ui->edit_adress->text());
-    allLines.push_back(ui->edit_number->text());
-    allLines.push_back(ui->edit_designation->text());
-    allLines.push_back(ui->edit_day1->text());
-    allLines.push_back(ui->edit_mon1->text());
-    allLines.push_back(ui->edit_year1->text());
-    allLines.push_back(ui->edit_day2->text());
-    allLines.push_back(ui->edit_mon2->text());
-    allLines.push_back(ui->edit_year2->text());
+    if(ui->edit_name->text() != "") allLines.push_back(ui->edit_name->text());
+    else allLines.push_back("");
+
+    if(ui->edit_adress->text() != "") allLines.push_back(ui->edit_adress->text());
+    else allLines.push_back("");
+
+    if(ui->edit_number->text() != "") allLines.push_back(ui->edit_number->text());
+    else allLines.push_back("");
+
+    if(ui->edit_designation->text() != "") allLines.push_back(ui->edit_designation->text());
+    else allLines.push_back("");
+
+    if(ui->edit_day1->text() != "") allLines.push_back(ui->edit_day1->text());
+    else allLines.push_back("");
+
+    if(ui->edit_mon1->text() != "") allLines.push_back(ui->edit_mon1->text());
+    else allLines.push_back("");
+
+    if(ui->edit_year1->text() != "") allLines.push_back(ui->edit_year1->text());
+    else allLines.push_back("");
+
+    if(ui->edit_day2->text() != "") allLines.push_back(ui->edit_day2->text());
+    else allLines.push_back("");
+
+    if(ui->edit_mon2->text() != "") allLines.push_back(ui->edit_mon2->text());
+    else allLines.push_back("");
+
+    if(ui->edit_year2->text() != "") allLines.push_back(ui->edit_year2->text());
+    else allLines.push_back("");
+
+
 
     vector<string> str_parametros;
-    for(QString str : allLines){
+    for(const QString &str : allLines){
         str_parametros.push_back(str.toStdString());
     }
 
-    vector<int> achados = this->data->getEmpresa().funcionarios_achados(str_parametros);
+    try {
+        vector<int> achados = this->empresa->funcionarios_achados(str_parametros);
+        ui->listWidget->clear();
+        for(int index : achados){
+            QString name = QString::fromStdString(empresa->get_Func_com_index(index)->getNome());
+            QString number = QString::fromStdString(empresa->get_Func_com_index(index)->getCodFuncionario());
 
-    ui->listWidget->clear();
-    for(int index : achados){
-        QString name = QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getNome());
-        QString number = QString::fromStdString(data->getEmpresa().get_Func_com_index(index)->getCodFuncionario());
-
-        QString view = number + " - " + name;
-        ui->listWidget->addItem(view);
-
+            QString view = number + " - " + name;
+            ui->listWidget->addItem(view);
+        }
+    } catch (string e) {
+        QMessageBox::critical(this, "ERRO", QString::fromStdString(e));
     }
+
+    allLines.clear();
 }
 
 
 void edit::on_bt_exihibition_clicked()
 {
-    int index;
-
-    Exihibition* exib = new Exihibition();
-    mySignals->connect(this, SIGNAL( funcionario_selecionado( int index )), exib,  SLOT( getIndex( int index_ ) ));
-
-    if(ui->listWidget->currentRow() == 0){
-        index = 0;
+    if(ui->listWidget->currentRow() < 0){
+        QMessageBox::critical(this, "ERRO", "Nenhum funcionario selecionado");
     }
     else{
-        index = ui->listWidget->currentRow() - 1;
+        int index;
+        index = ui->listWidget->currentRow();
+
+        Exihibition* exib = new Exihibition(this, empresa, index);
+        exib->show();
+        att_list();
     }
-
-
-    emit mySignals->funcionario_selecionado(index);
 }
 
-void edit::receber_dados(Data& data_){
-    data = &data_;
+void edit::att_list()
+{
+    QString name, designation, view;
+
+    ui->listWidget->clear();
+
+    int size = empresa->getVectorSize();
+    for(int i = 0; i < size; i++){
+            QString name = QString::fromStdString(empresa->get_Func_com_index(i)->getNome());
+            QString number = QString::fromStdString(empresa->get_Func_com_index(i)->getCodFuncionario());
+
+            QString view = number + " - " + name;
+            ui->listWidget->addItem(view);
+    }
+}
+
+void edit::on_pushButton_clicked()
+{
+    clear_LineEdits();
+    att_list();
+}
+
+
+void edit::on_bt_erase_clicked()
+{
+    int index = ui->listWidget->currentRow();
+
+    if(index < 0)
+    {
+        QMessageBox::critical(this, "ERRO", "Nenhum funcionario selecionado");
+        return;
+    }
+    else
+    {
+        empresa->apagar_funcionario(index);
+        QMessageBox::information(this, "DELETAR", "O fucionario foi apagado com sucesso do sistema!");
+    }
+    att_list();
 }
 

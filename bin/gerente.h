@@ -7,13 +7,13 @@ class Gerente : public Funcionario{
 
     public:
         Gerente();
-        Gerente(string areaSupervisao, string codFuncionario, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario);
+        Gerente(string areaSupervisao, string nome, string endereco, string telefone, string designacao, tm dataIngresso, double salario);
         virtual ~Gerente(){}
 
         void setAreaSupervisao(string AreaSupervisao);
         string getAreaSupervisao();
 
-           void aumentoSalarial();
+        void aumentoSalarial();
     private:
         string areaSupervisao;
 

@@ -1,12 +1,15 @@
 #include "financial.h"
 #include "ui_financial.h"
 
-financial::financial(QWidget *parent, Data* data_) :
+financial::financial(QWidget *parent, Empresa *empresa_) :
     QDialog(parent),
     ui(new Ui::financial)
 {
     ui->setupUi(this);
-    data = data_;
+    empresa = empresa_;
+
+    //listWidget init
+    att_list();
 }
 
 financial::~financial()
@@ -29,29 +32,35 @@ void financial::on_bt_upSalary_clicked()
     QMessageBox::StandardButton reply = QMessageBox::question(this, "Aumento Salarial", out,
                           QMessageBox::Yes | QMessageBox::No);
     if(reply == QMessageBox::Yes){
-        this->data->getEmpresa().aumentoSalarioGeral();
+        this->empresa->aumentoSalarioGeral();
     }
 
-    //listWidget init
-    int size = data->getEmpresa().getVectorSize();
-    for(int i = 0; i < size; i++){
-            QString name = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getNome());
-            QString designation = QString::fromStdString(data->getEmpresa().get_Func_com_index(i)->getDesignacao());
-
-            QString view = designation  + " - " + name;
-            ui->list_nameAndWork->addItem(view);
-    }
 
 }
 
 void financial::on_bt_generatePaymentSheet_clicked()
 {
-    sheet = new PaymentSheet(this, data);
+    sheet = new PaymentSheet(this, empresa);
     sheet->show();
 }
 
-void financial::receber_dados(Data& data_){
-    data = &data_;
+
+
+void financial::att_list()
+{
+    QString name, designation, view;
+
+    ui->list_nameAndWork->clear();
+
+    int size = empresa->getVectorSize();
+    for(int i = 0; i < size; i++){
+            QString name = QString::fromStdString(empresa->get_Func_com_index(i)->getNome());
+            QString designation = QString::fromStdString(empresa->get_Func_com_index(i)->getDesignacao());
+
+            QString view = designation  + " - " + name;
+            ui->list_nameAndWork->addItem(view);
+    }
+
 }
 
 
