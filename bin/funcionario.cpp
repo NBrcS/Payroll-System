@@ -118,8 +118,19 @@ bool Funcionario::ComparaDatas(tm data){
 
 void Funcionario::tributarSalario()
 {
-    double parte_previdencia = salario * (20/100);
+    double parte_previdencia = 0.0;
     double parte_IR;
+
+
+    if(salario < 1212){
+        parte_previdencia = salario * (7.5/100);
+    }else if(salario >= 1212.01 && salario <= 2427.35){
+        parte_previdencia = salario * (9.0/100);
+    }else if(salario >= 2427.36 && salario <= 3641.03){
+        parte_previdencia = salario * (12.0/1000);
+    }else{
+        parte_previdencia = salario * (14.0/100);
+    }
 
     if(salario < 1903.98){
         parte_IR = 0;

@@ -13,7 +13,7 @@ class PaymentSheet : public QDialog
     Q_OBJECT
 
 public:
-    explicit PaymentSheet(QWidget *parent = nullptr, Empresa empresa_ = Empresa());
+    explicit PaymentSheet(QWidget *parent = nullptr, Empresa* empresa_ = nullptr);
     ~PaymentSheet();
 
 private slots:
@@ -37,7 +37,7 @@ private:
     bool radio4_isToggled;
 
     vector<QString> monthsVec;
-    Empresa empresa;
+    Empresa* empresa;
 };
 
 #endif // PAYMENTSHEET_H

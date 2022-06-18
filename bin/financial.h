@@ -18,7 +18,7 @@ class financial : public QDialog
     Q_OBJECT
 
 public:
-    explicit financial(QWidget *parent = nullptr, Empresa empresa_ = Empresa());
+    explicit financial(QWidget *parent = nullptr, Empresa* empresa_ = nullptr);
     ~financial();
 
 private slots:
@@ -26,15 +26,13 @@ private slots:
 
     void on_bt_generatePaymentSheet_clicked();
 
-    void receber_dados(Empresa&);
-
     void att_list();
 
 private:
     Ui::financial *ui;
     PaymentSheet* sheet;
 
-    Empresa empresa;
+    Empresa* empresa;
 
 };
 

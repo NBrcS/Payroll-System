@@ -15,7 +15,7 @@ class edit : public QDialog
     Q_OBJECT
 
 public:
-    explicit edit(QWidget *parent = nullptr, Empresa empresa_ = Empresa());
+    explicit edit(QWidget *parent = nullptr, Empresa *empresa_ = nullptr);
     ~edit();
 
     void clear_LineEdits();
@@ -27,8 +27,6 @@ private slots:
 
     void on_bt_exihibition_clicked();
 
-    void receber_dados(Empresa&);
-
     void att_list();
 
     void on_pushButton_clicked();
@@ -37,7 +35,7 @@ private slots:
 
 private:
     Ui::edit *ui;
-    Empresa empresa;
+    Empresa *empresa;
     vector<QString> allLines;
     Signals* mySignals;
 };

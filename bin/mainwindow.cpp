@@ -133,16 +133,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_bt_edit_clicked()
 {
-    edit_form = new edit(this, empresa);
+    edit_form = new edit(this, &empresa);
     edit_form->show();
-
+    att_list();
 }
 
 
 void MainWindow::on_bt_financial_clicked()
 {
-    financial_form = new financial(this, empresa);
+    financial_form = new financial(this, &empresa);
     financial_form->show();
+    att_list();
+
 }
 
 
@@ -160,8 +162,10 @@ void MainWindow::on_bt_credits_clicked()
 
 void MainWindow::on_bt_add_clicked()
 {
-    final = new finaledit(this, empresa);
+    final = new finaledit(this, &empresa);
     final->show();
+    att_list();
+
 }
 
 void MainWindow::att_list()

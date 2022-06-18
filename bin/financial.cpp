@@ -1,7 +1,7 @@
 #include "financial.h"
 #include "ui_financial.h"
 
-financial::financial(QWidget *parent, Empresa empresa_) :
+financial::financial(QWidget *parent, Empresa *empresa_) :
     QDialog(parent),
     ui(new Ui::financial)
 {
@@ -32,7 +32,7 @@ void financial::on_bt_upSalary_clicked()
     QMessageBox::StandardButton reply = QMessageBox::question(this, "Aumento Salarial", out,
                           QMessageBox::Yes | QMessageBox::No);
     if(reply == QMessageBox::Yes){
-        this->empresa.aumentoSalarioGeral();
+        this->empresa->aumentoSalarioGeral();
     }
 
 
@@ -44,10 +44,7 @@ void financial::on_bt_generatePaymentSheet_clicked()
     sheet->show();
 }
 
-void financial::receber_dados(Empresa& data_){
-    Empresa* p_data = &data_;
-    empresa = *p_data;
-}
+
 
 void financial::att_list()
 {
@@ -55,10 +52,10 @@ void financial::att_list()
 
     ui->list_nameAndWork->clear();
 
-    int size = empresa.getVectorSize();
+    int size = empresa->getVectorSize();
     for(int i = 0; i < size; i++){
-            QString name = QString::fromStdString(empresa.get_Func_com_index(i)->getNome());
-            QString designation = QString::fromStdString(empresa.get_Func_com_index(i)->getDesignacao());
+            QString name = QString::fromStdString(empresa->get_Func_com_index(i)->getNome());
+            QString designation = QString::fromStdString(empresa->get_Func_com_index(i)->getDesignacao());
 
             QString view = designation  + " - " + name;
             ui->list_nameAndWork->addItem(view);

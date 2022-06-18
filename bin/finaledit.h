@@ -15,7 +15,7 @@ class finaledit : public QDialog
     Q_OBJECT
 
 public:
-    explicit finaledit(QWidget *parent = nullptr, Empresa Empresa_ = Empresa(), int index = 0);
+    explicit finaledit(QWidget *parent = nullptr, Empresa *Empresa_ = nullptr, int index = 0);
     ~finaledit();
 
 private slots:
@@ -29,6 +29,8 @@ private slots:
 
     void clear_bools();
 
+    void clear_all_edits();
+
     void select_func(int);
 
     void att_list();
@@ -37,7 +39,7 @@ private slots:
 
     void on_radio_Operator_toggled(bool checked);
 
-    void receber_dados(Empresa&);
+    void on_listWidget_infoExihibiton_currentRowChanged(int currentItem);
 
 private:
     Ui::finaledit *ui;
@@ -45,7 +47,7 @@ private:
     bool president, director, manager, operador;
     QString designation;
 
-    Empresa empresa;
+    Empresa *empresa;
     int index;
 };
 

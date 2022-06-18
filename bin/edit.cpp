@@ -4,7 +4,7 @@
 #include "exihibition.h"
 
 
-edit::edit(QWidget *parent, Empresa empresa_) :
+edit::edit(QWidget *parent, Empresa *empresa_) :
     QDialog(parent),
     ui(new Ui::edit)
 {
@@ -100,11 +100,11 @@ void edit::on_bt_search_clicked()
     }
 
     try {
-        vector<int> achados = this->empresa.funcionarios_achados(str_parametros);
+        vector<int> achados = this->empresa->funcionarios_achados(str_parametros);
         ui->listWidget->clear();
         for(int index : achados){
-            QString name = QString::fromStdString(empresa.get_Func_com_index(index)->getNome());
-            QString number = QString::fromStdString(empresa.get_Func_com_index(index)->getCodFuncionario());
+            QString name = QString::fromStdString(empresa->get_Func_com_index(index)->getNome());
+            QString number = QString::fromStdString(empresa->get_Func_com_index(index)->getCodFuncionario());
 
             QString view = number + " - " + name;
             ui->listWidget->addItem(view);
@@ -138,21 +138,15 @@ void edit::att_list()
 
     ui->listWidget->clear();
 
-    int size = empresa.getVectorSize();
+    int size = empresa->getVectorSize();
     for(int i = 0; i < size; i++){
-            QString name = QString::fromStdString(empresa.get_Func_com_index(i)->getNome());
-            QString number = QString::fromStdString(empresa.get_Func_com_index(i)->getCodFuncionario());
+            QString name = QString::fromStdString(empresa->get_Func_com_index(i)->getNome());
+            QString number = QString::fromStdString(empresa->get_Func_com_index(i)->getCodFuncionario());
 
             QString view = number + " - " + name;
             ui->listWidget->addItem(view);
     }
 }
-
-void edit::receber_dados(Empresa& empresa_){
-    Empresa* p_data = &empresa_;
-    empresa = *p_data;
-}
-
 
 void edit::on_pushButton_clicked()
 {
@@ -172,7 +166,7 @@ void edit::on_bt_erase_clicked()
     }
     else
     {
-        empresa.apagar_funcionario(index);
+        empresa->apagar_funcionario(index);
         QMessageBox::information(this, "DELETAR", "O fucionario foi apagado com sucesso do sistema!");
     }
     att_list();
