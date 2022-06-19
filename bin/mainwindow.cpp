@@ -16,6 +16,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    QSqlDatabase bancoDeDados = QSqlDatabase::addDatabase("QSQLITE");
+    bancoDeDados.setDatabaseName("C:/Users/Saulo/Desktop/final payroll/Payroll-System/bin/bd_conection/bd_conection.db");
+
+    if (!bancoDeDados.open()){
+        ui->label->setText("não foi possivel abrir o banco de dados");
+    }
+    else{
+        ui->label->setText("banco de dados conectado");
+    }
+
     empresa = Empresa();
 
 

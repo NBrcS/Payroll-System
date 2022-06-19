@@ -5,6 +5,7 @@
 #include "empresa.h"
 #include "signals.h"
 #include <QMessageBox>
+#include "ui_edit.h"
 
 namespace Ui {
 class edit;
@@ -32,6 +33,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_bt_erase_clicked();
+
+
 
 private:
     Ui::edit *ui;
