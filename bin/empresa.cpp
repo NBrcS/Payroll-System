@@ -150,7 +150,13 @@ double Empresa::funcionario_mensal(int index_func, int index_mes)
     return this->funcionarios[index_func]->get_SalarioMes(index_mes);
 }
 
-
+/*
+ *
+ * funcionarios_achados retorna um vector de valores inteiros que representara
+ * o indice dos funcionarios achados de acordo com os parametros passados em um
+ * vector string q foi tratado no botao de busca, formulario edit
+ *
+ */
 vector<int> Empresa::funcionarios_achados(vector<string> parametros)
 {
     vector<bool> existe;
@@ -277,7 +283,12 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
     achados.clear();
 }
 
-
+/*
+ *
+ *  compare_datas retorna true caso as datas passadas como parametro forem iguais
+ *  e false caso elas diferenciem, nao sao considerados horarios
+ *
+ */
 bool Empresa::compare_datas(tm data_inicio, tm data_final)
 {
     if(data_inicio.tm_mday == data_final.tm_mday &&
@@ -300,7 +311,12 @@ void Empresa::add_func(Funcionario* fun_)
     this->funcionarios.push_back(fun_);
 }
 
-
+/*
+ *
+ *  att_func atualiza o ponteiro de funcionario de indice passado como parametro
+ *  para o ponteiro de funcionario tambem passado tambem como parametro
+ *
+ */
 void Empresa::att_func(Funcionario* fun, int index)
 {
     funcionarios[index] = fun;
@@ -325,6 +341,12 @@ void Empresa::aumentoSalarioGeral()
     }
 }
 
+/*
+ *
+ * apagar_funcionario deleta o funcionario no indice passado como parametro
+ * e automaticamente reorganiza o vector de funcionarios
+ *
+ */
 void Empresa::apagar_funcionario(int index){
     this->funcionarios.erase(funcionarios.begin() + index);
 }
