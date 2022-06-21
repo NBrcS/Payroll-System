@@ -171,7 +171,7 @@ void PaymentSheet::on_bt_calcule_clicked()
         QString name, number, sal_str_brt, sal_str_liq , sal_daily_str, worked_days_str, extra_hours_str;
 
         int index_funcionario = ui->combo_employees->currentIndex();
-        int index_mes = ui->combo_months->currentIndex() - 1;
+        int index_mes = ui->combo_months->currentIndex();
 
         name = QString::fromStdString(this->empresa->get_Func_com_index(index_funcionario)->getNome());
         number = QString::fromStdString(this->empresa->get_Func_com_index(index_funcionario)->getCodFuncionario());
