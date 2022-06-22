@@ -4,6 +4,8 @@
 #include "gerente.h"
 #include "operador.h"
 #include "presidente.h"
+#include <QtSql>
+#include <QMessageBox>
 
 #include "ui_finaledit.h"
 #include <QModelIndex>
@@ -24,8 +26,10 @@ finaledit::finaledit(QWidget *parent, Empresa *empresa_, int index_) :
     ui->lineEdit_Year->setValidator( new QIntValidator(1940, 2100, this) );
     ui->lineEdit_Salary->setValidator( new QIntValidator(0, 100000000, this) );
 
-    on_listWidget_infoExihibiton_currentRowChanged(index);
-    att_list();
+    if(index != -1){
+        att_list();
+        on_listWidget_infoExihibiton_currentRowChanged(index);
+    }
 }
 
 finaledit::~finaledit()
@@ -166,6 +170,7 @@ void finaledit::on_bt_att_clicked()
                                       phone.toStdString(),
                                       designation.toStdString(),
                                       date,  salary);
+
     }
     else if(manager){
         QString supervision = ui->lineEdit_morphy1->text();
@@ -218,6 +223,7 @@ void finaledit::on_bt_att_clicked()
 
     att_list();
     clear_all_edits();
+
 }
 
 void finaledit::select_func(int index)

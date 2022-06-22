@@ -2,6 +2,11 @@
 #include "ui_edit.h"
 #include "finaledit.h"
 #include "exihibition.h"
+#include <QtSql>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QMessageBox>
+#include "funcionario.h"
 
 
 edit::edit(QWidget *parent, Empresa *empresa_) :
@@ -9,6 +14,7 @@ edit::edit(QWidget *parent, Empresa *empresa_) :
     ui(new Ui::edit)
 {
     ui->setupUi(this);
+
     empresa = empresa_;
 
     ui->edit_day1->setValidator( new QIntValidator(0, 31, this) );
@@ -20,6 +26,36 @@ edit::edit(QWidget *parent, Empresa *empresa_) :
 
     att_list();
     clear_LineEdits();
+
+   QSqlQuery query;
+    query.prepare("select * from tb_funcionario");
+    if(query.exec()){
+        //int cont = 0;
+
+       /* ui->listWidget->setColumnCount(10);
+            while(query.next()){
+                ui->listWidget->insertRow(cont);
+                ui->listWidget->setItem(cont,0,new QTableWidgetItem(query.value(0).toString()));
+                ui->listWidget->setItem(cont,1,new QTableWidgetItem(query.value(1).toString()));
+                ui->listWidget->setItem(cont,2,new QTableWidgetItem(query.value(2).toString()));
+                ui->listWidget->setItem(cont,3,new QTableWidgetItem(query.value(3).toString()));
+                ui->listWidget->setItem(cont,4,new QTableWidgetItem(query.value(4).toString()));
+                ui->listWidget->setItem(cont,5,new QTableWidgetItem(query.value(5).toString()));
+                ui->listWidget->setItem(cont,6,new QTableWidgetItem(query.value(6).toString()));
+                ui->listWidget->setItem(cont,7,new QTableWidgetItem(query.value(7).toString()));
+                ui->listWidget->setItem(cont,8,new QTableWidgetItem(query.value(8).toString()));
+                ui->listWidget->setItem(cont,9,new QTableWidgetItem(query.value(9).toString()));
+                ui->listWidget->setRowHeight(cont,20);
+                cont++;
+             */ }
+            else{
+        //QMessageBox::warning(this,"ERRO","Erro ao pesquisar tabela de contatos");
+
+ }
+
+
+
+
 
 }
 
@@ -45,6 +81,8 @@ void edit::on_bt_edit_clicked()
     }
 
     att_list();
+
+
 }
 
 void edit::clear_LineEdits(){
@@ -114,6 +152,9 @@ void edit::on_bt_search_clicked()
     }
 
     allLines.clear();
+
+
+
 }
 
 

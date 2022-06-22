@@ -6,6 +6,21 @@
 #include "funcionario.h"
 #include <exception>
 
+#include "operador.h"
+#include "gerente.h"
+#include "diretor.h"
+#include "presidente.h"
+
+#include <iomanip>
+#include <vector>
+#include <ctime>
+#include <string>
+#include <iostream>
+#include <QDebug>
+#include <QtSql>
+#include <QFileInfo>
+
+
 using namespace std;
 
 class Empresa
@@ -16,7 +31,7 @@ class Empresa
 
     public:
         Empresa();
-        ~Empresa(){}
+        virtual ~Empresa();
 
         int getVectorSize();
         Funcionario* get_Func_com_index(int);

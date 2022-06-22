@@ -178,8 +178,8 @@ void PaymentSheet::on_bt_calcule_clicked()
         sal_str_brt = QString::number(this->empresa->get_Func_com_index(index_funcionario)->getSalario());
         sal_str_liq = QString::number(this->empresa->get_Func_com_index(index_funcionario)->getSalario_tributado());
         sal_daily_str = QString::number(this->empresa->get_Func_com_index(index_funcionario)->getSalario_tributado() / 21);
-        worked_days_str = QString::number(this->empresa->get_Func_com_index(index_funcionario)->getDiasTrabalhados(index_mes));
-        extra_hours_str = QString::number(this->empresa->get_Func_com_index(index_funcionario)->getHorasExtras(index_mes));
+        worked_days_str = QString::number(this->empresa->get_Func_com_index(index_funcionario)->getDiasTrabalhados(index_mes-1));
+        extra_hours_str = QString::number(this->empresa->get_Func_com_index(index_funcionario)->getHorasExtras(index_mes-1));
 
         out = "Relatório mensal de " + name + ": \n\n";
         out += "Mês: " + monthsVec[index_mes] + "\n";
@@ -192,8 +192,8 @@ void PaymentSheet::on_bt_calcule_clicked()
 
 
         double hour_value = this->empresa->get_Func_com_index(index_funcionario)->getValor_hora();
-        int worked_days = this->empresa->get_Func_com_index(index_funcionario)->getDiasTrabalhados(index_mes);
-        int extra_hours = this->empresa->get_Func_com_index(index_funcionario)->getHorasExtras(index_mes);
+        int worked_days = this->empresa->get_Func_com_index(index_funcionario)->getDiasTrabalhados(index_mes - 1);
+        int extra_hours = this->empresa->get_Func_com_index(index_funcionario)->getHorasExtras(index_mes - 1);
 
         totalFinal = (hour_value * 8) * worked_days
                     + (hour_value * 1.5) * extra_hours;

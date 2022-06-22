@@ -1,17 +1,5 @@
 #include "empresa.h"
 
-#include "operador.h"
-#include "gerente.h"
-#include "diretor.h"
-#include "presidente.h"
-
-#include <iomanip>
-#include <vector>
-#include <ctime>
-#include <string>
-#include <iostream>
-#include <QDebug>
-
 using namespace std;
 
 Empresa::Empresa()
@@ -20,6 +8,254 @@ Empresa::Empresa()
     {
         this->folhaSalarial[i] = 0.0;
     }
+
+    QString dir = qApp->applicationDirPath();
+    QString banco = dir + "/bd_conection/db_empresa.db";
+
+    QSqlDatabase bd = QSqlDatabase::addDatabase("QSQLITE");
+    bd.setDatabaseName(banco);
+
+    if(!bd.open()) qDebug() << "O banco de dados não está aberto";
+    else{
+        QSqlQuery query;
+        query.prepare("select * from tb_funcionario");
+
+        if(query.exec()){
+            while(query.next()){
+                Funcionario* funcionario = nullptr;
+
+                QString cod = query.value(1).toString();
+                QString nome = query.value(2).toString();
+                QString telefone = query.value(3).toString();
+                QString endereco = query.value(4).toString();
+                QString salario = query.value(6).toString();
+                int dia = query.value(9).toInt();
+                int mes = query.value(10).toInt();
+                int ano = query.value(11).toInt();
+
+                tm data;
+                data.tm_mday = dia;
+                data.tm_mon = mes;
+                data.tm_year = ano;
+
+                QString designacao = query.value(5).toString();
+                if(designacao.compare("Operador") == 0){
+                    funcionario = new Operador( nome.toStdString(),
+                                                endereco.toStdString(),
+                                                telefone.toStdString(),
+                                                designacao.toStdString(),
+                                                data,  salario.toDouble());
+
+                }else if(designacao.compare("Gerente") == 0){
+                    QString areaSupervisao = query.value(12).toString();
+
+                    funcionario = new Gerente( areaSupervisao.toStdString(),
+                                               nome.toStdString(),
+                                               endereco.toStdString(),
+                                               telefone.toStdString(),
+                                               designacao.toStdString(),
+                                               data,  salario.toDouble());
+
+                }else if(designacao.compare("Diretor") == 0){
+                    QString areaSupervisao = query.value(12).toString();
+                    QString graduacao =  query.value(13).toString();
+
+                    funcionario = new Diretor( areaSupervisao.toStdString(),
+                                               graduacao.toStdString(),
+                                               nome.toStdString(),
+                                               endereco.toStdString(),
+                                               telefone.toStdString(),
+                                               designacao.toStdString(),
+                                               data, salario.toDouble());
+
+                }else if(designacao.compare("Presidente") == 0){
+                    QString formacaoAcademica = query.value(14).toString();
+                    QString graduacao = query.value(13).toString();
+
+                    funcionario = new Presidente( graduacao.toStdString(),
+                                                  formacaoAcademica.toStdString(),
+                                                  nome.toStdString(),
+                                                  endereco.toStdString(),
+                                                  telefone.toStdString(),
+                                                  designacao.toStdString(),
+                                                  data,  salario.toDouble());
+                }
+
+                QString salario_tributado = query.value(7).toString();
+                QString valor_hora = query.value(8).toString();
+                funcionario->setSalario_tributado(salario_tributado.toDouble());
+                funcionario->setValor_hora(valor_hora.toDouble());
+                funcionario->setCodFuncionario(cod.toStdString());
+
+                funcionarios.push_back(funcionario);
+            }
+        }
+        else qDebug() << "ERRO para coletar os dados dos funcionarios";
+
+        query.prepare("select * from tb_dias_trabalhados");
+        if(query.exec()){
+            int j = 0;
+            while(query.next()){
+                for(int i = 0; i < 12; i++){
+                    funcionarios[j]->setDiasTrabalhados(query.value(i).toInt(), i);
+
+                }
+                j++;
+            }
+        }
+        else qDebug() << "Erro ao buscar na tabela de dias trabalhados";
+
+        query.prepare("select * from tb_horas_trabalhadas");
+        if(query.exec()){
+            int j = 0;
+            while(query.next()){
+                for(int i = 0; i < 12; i++){
+                    funcionarios[j]->setHoras_trabalhadas(query.value(i).toInt(), i);
+
+                }
+                j++;
+            }
+        }
+        else qDebug() << "Erro ao buscar na tabela de horas trabalhadas";
+
+        query.prepare("select * from tb_salario_mensal");
+        if(query.exec()){
+            int j = 0;
+            while(query.next()){
+                for(int i = 0; i < 12; i++){
+                    funcionarios[j]->setSalario_mensal(query.value(i).toDouble(), i);
+
+                }
+                j++;
+            }
+        }
+        else qDebug() << "Erro ao buscar na tabela de salarios mensais";
+
+        query.prepare("select * from tb_folha_empresa");
+        if(query.exec()){
+            int i = 0;
+            while(query.next()){
+                folhaSalarial[i] = query.value(0).toDouble();
+
+                i++;
+            }
+        }
+        else qDebug() << "Erro ao coletar a folha salarial da empresa";
+    }
+}
+
+Empresa::~Empresa()
+{
+    QSqlQuery query;
+
+
+    if((query.exec("DELETE FROM tb_funcionario") &&
+        query.exec("DELETE FROM tb_folha_empresa") &&
+        query.exec("DELETE FROM tb_dias_trabalhados") &&
+        query.exec("DELETE FROM tb_salario_mensal") &&
+        query.exec("DELETE FROM tb_horas_trabalhadas"))){
+
+        QSqlQuery query2;
+
+        for(int i = 0; i < funcionarios.size(); i++){
+            QString name = QString::fromStdString(funcionarios[i]->getNome());
+            QString cod = QString::fromStdString(funcionarios[i]->getCodFuncionario());
+            QString telefone = QString::fromStdString(funcionarios[i]->getTelefone());
+            QString endereco = QString::fromStdString(funcionarios[i]->getEndereco());
+            QString salario = QString::number(funcionarios[i]->getSalario());
+            tm data = funcionarios[i]->getDataIngresso();
+
+            QString dia = QString::number(data.tm_mday);
+            QString mes = QString::number(data.tm_mon);
+            QString ano = QString::number(data.tm_year);
+
+            QString salario_tributado = QString::number(funcionarios[i]->getSalario_tributado());
+            QString valor_hora = QString::number(funcionarios[i]->getValor_hora());
+
+            QString designacao = QString::fromStdString(funcionarios[i]->getDesignacao());
+
+            if(designacao.compare("Operador") == 0){
+                query2.prepare("insert into tb_funcionario (cod_funcionario,nome_funcionario,telefone_funcionario,endereco_funcionario,"
+                                                            "designacao_funcionario,salario_funcionario,salario_tributado,valor_hora,"
+                                                            "dia_funcionario,mes_funcionario,ano_funcionario)"
+                                "values ('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
+                                        "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
+                                        "'"+dia+"','"+mes+"','"+ano+"')");
+
+            }else if(designacao.compare("Gerente") == 0){
+                QString areaSupervisao = QString::fromStdString(( (Gerente* ) funcionarios[i])->getAreaSupervisao());
+                query2.prepare("insert into tb_funcionario (cod_funcionario,nome_funcionario,telefone_funcionario,endereco_funcionario,"
+                                                            "designacao_funcionario,salario_funcionario,salario_tributado,valor_hora,"
+                                                            "dia_funcionario,mes_funcionario,ano_funcionario,areaSupervisao)"
+                                "values ('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
+                                        "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
+                                        "'"+dia+"','"+mes+"','"+ano+"','"+areaSupervisao+"')");
+
+
+            }else if(designacao.compare("Diretor") == 0){
+                QString areaSupervisao = QString::fromStdString(( (Diretor* ) funcionarios[i])->getAreaSupervisao());
+                QString graduacao =  QString::fromStdString(( (Diretor* ) funcionarios[i])->getAreaFormacao());
+                query2.prepare("insert into tb_funcionario (cod_funcionario,nome_funcionario,telefone_funcionario,endereco_funcionario,"
+                                                            "designacao_funcionario,salario_funcionario,salario_tributado,valor_hora,"
+                                                            "dia_funcionario,mes_funcionario,ano_funcionario,areaSupervisao,graduacao)"
+                                "values ('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
+                                        "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
+                                        "'"+dia+"','"+mes+"','"+ano+"','"+areaSupervisao+"','"+graduacao+"')");
+
+
+            }else if(designacao.compare("Presidente") == 0){
+                QString formacaoAcademica = QString::fromStdString(( (Presidente* ) funcionarios[i])->getFormacaoMaxima());
+                QString graduacao = QString::fromStdString(( (Presidente* ) funcionarios[i])->getAreaFormacao());
+                query2.prepare("insert into tb_funcionario (cod_funcionario,nome_funcionario,telefone_funcionario,endereco_funcionario,"
+                                                            "designacao_funcionario,salario_funcionario,salario_tributado,valor_hora,"
+                                                            "dia_funcionario,mes_funcionario,ano_funcionario,formacao_academica,graduacao)"
+                                "values ('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
+                                        "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
+                                        "'"+dia+"','"+mes+"','"+ano+"','"+formacaoAcademica+"','"+graduacao+"')");
+            }
+
+            if(!query2.exec()) qDebug() << "Erro ao inserir funcionario no banco de dados";
+            else{
+                QSqlQuery query3;
+                query3.exec("insert into tb_dias_trabalhados (Janeiro, Fevereiro, Marco, Abril,"
+                                                                " Maio, Junho, Julho, Agosto,"
+                                                                " Setembro, Outubro, Novembro, Dezembro) "
+                            "values "
+                            "('"+QString::number(funcionarios[i]->getDiasTrabalhados(0))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(1))+"',"
+                            "'"+QString::number(funcionarios[i]->getDiasTrabalhados(2))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(3))+"',"
+                            "'"+QString::number(funcionarios[i]->getDiasTrabalhados(4))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(5))+"',"
+                            "'"+QString::number(funcionarios[i]->getDiasTrabalhados(6))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(7))+"',"
+                            "'"+QString::number(funcionarios[i]->getDiasTrabalhados(8))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(9))+"',"
+                            "'"+QString::number(funcionarios[i]->getDiasTrabalhados(10))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(11))+"')");
+
+                query3.exec("insert into tb_horas_trabalhadas (Janeiro, Fevereiro, Marco, Abril,"
+                                                                " Maio, Junho, Julho, Agosto,"
+                                                                " Setembro, Outubro, Novembro, Dezembro) "
+                            "values "
+                            "('"+QString::number(funcionarios[i]->getHorasExtras(0))+"','"+QString::number(funcionarios[i]->getHorasExtras(1))+"',"
+                            "'"+QString::number(funcionarios[i]->getHorasExtras(2))+"','"+QString::number(funcionarios[i]->getHorasExtras(3))+"',"
+                            "'"+QString::number(funcionarios[i]->getHorasExtras(4))+"','"+QString::number(funcionarios[i]->getHorasExtras(5))+"',"
+                            "'"+QString::number(funcionarios[i]->getHorasExtras(6))+"','"+QString::number(funcionarios[i]->getHorasExtras(7))+"',"
+                            "'"+QString::number(funcionarios[i]->getHorasExtras(8))+"','"+QString::number(funcionarios[i]->getHorasExtras(9))+"',"
+                            "'"+QString::number(funcionarios[i]->getHorasExtras(10))+"','"+QString::number(funcionarios[i]->getHorasExtras(11))+"')");
+
+                query3.exec("insert into tb_salario_mensal (Janeiro, Fevereiro, Marco, Abril,"
+                                                                " Maio, Junho, Julho, Agosto,"
+                                                                " Setembro, Outubro, Novembro, Dezembro) "
+                            "values "
+                            "('"+QString::number(funcionarios[i]->get_SalarioMes(0))+"','"+QString::number(funcionarios[i]->get_SalarioMes(1))+"',"
+                            "'"+QString::number(funcionarios[i]->get_SalarioMes(2))+"','"+QString::number(funcionarios[i]->get_SalarioMes(3))+"',"
+                            "'"+QString::number(funcionarios[i]->get_SalarioMes(4))+"','"+QString::number(funcionarios[i]->get_SalarioMes(5))+"',"
+                            "'"+QString::number(funcionarios[i]->get_SalarioMes(6))+"','"+QString::number(funcionarios[i]->get_SalarioMes(7))+"',"
+                            "'"+QString::number(funcionarios[i]->get_SalarioMes(8))+"','"+QString::number(funcionarios[i]->get_SalarioMes(9))+"',"
+                            "'"+QString::number(funcionarios[i]->get_SalarioMes(10))+"','"+QString::number(funcionarios[i]->get_SalarioMes(11))+"')");
+            }
+        }
+
+        for(int i = 0; i < 12; i++)
+            query2.exec("insert into tb_folha_empresa (folha_mensal) value ("+QString::number(folhaSalarial[i])+")");
+    }
+    else qDebug() << "Banco não conseguiu ser limpo";
 }
 
 
@@ -234,7 +470,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
             if((existe[4] && existe[5] && existe[6]) && (existe[7] && existe[8] && existe[9]))
             {
                 if((stoi(parametros[4]) > 28 && stoi(parametros[5]) == 02 ) ||
-                    (stoi(parametros[7]) > 28 && stoi(parametros[8]) == 02 ))
+                        (stoi(parametros[7]) > 28 && stoi(parametros[8]) == 02 ))
                 {
                     throw ("Fevereiro não pode ter mais que 28 dias");
                 }
