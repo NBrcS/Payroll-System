@@ -22,6 +22,9 @@ class Funcionario{
         void setSalario(double salario);
         void setSalario_tributado(double newSalario_tributado);
         void setValor_hora(double newValor_hora);
+        void setDiasTrabalhados(int dias, int index);
+        void setHoras_trabalhadas(int horas, int index);
+        void setSalario_mensal(double salario, int index);
         string getCodFuncionario();
         string getNome();
         string getEndereco();
@@ -31,8 +34,6 @@ class Funcionario{
         double getSalario();      
         double getSalario_tributado() const;
         double getValor_hora() const;
-
-
 
         bool ComparaDatas(tm data);
         void tributarSalario();

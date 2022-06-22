@@ -182,3 +182,21 @@ void Funcionario::setSalario_tributado(double newSalario_tributado)
 {
     salario_tributado = newSalario_tributado;
 }
+
+void Funcionario::setDiasTrabalhados(int dias, int index)
+{
+    diasTrabalhados[index] = dias;
+}
+
+void Funcionario::setHoras_trabalhadas(int horas, int index)
+{
+    horasTrabalhadas[index] = horas;
+}
+
+void Funcionario::setSalario_mensal(double salario, int index)
+{
+    salariosMensais[index] = salario;
+}
+
+
+

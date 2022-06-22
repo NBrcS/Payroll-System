@@ -26,8 +26,10 @@ finaledit::finaledit(QWidget *parent, Empresa *empresa_, int index_) :
     ui->lineEdit_Year->setValidator( new QIntValidator(1940, 2100, this) );
     ui->lineEdit_Salary->setValidator( new QIntValidator(0, 100000000, this) );
 
-    on_listWidget_infoExihibiton_currentRowChanged(index);
-    att_list();
+    if(index != -1){
+        att_list();
+        on_listWidget_infoExihibiton_currentRowChanged(index);
+    }
 }
 
 finaledit::~finaledit()
@@ -156,26 +158,6 @@ void finaledit::on_bt_att_clicked()
                                    phone.toStdString(),
                                    designation.toStdString(),
                                    date, salary);
-        QSqlQuery query;
-        query.prepare("insert into tb_funcionario (nome_funcionario,telefone_funcionario,endereco_funcionario,salario_funcionario,dia_funcionario,mes_funcionario,ano_funcionario,supervisao_funcionario,formacao_funcionario)values"
-                      "('"+name+"','"+phone+"','"+adress+"','+salary+','+day+','+mon+','+year+','"+supervision+"','"+degreeArea+"')");
-        if(query.exec()){
-            QMessageBox::information(this,"","Registro gravado com sucesso");
-            ui->lineEdit_Name->clear();
-            ui->lineEdit_PhoneNumber->clear();
-            ui->lineEdit_Adress->clear();
-            ui->lineEdit_Salary->clear();
-            ui->lineEdit_Day->clear();
-            ui->lineEdit_Mon->clear();
-            ui->lineEdit_Year->clear();
-            ui->lineEdit_morphy1->clear();
-            ui->lineEdit_morphy2->clear();
-            ui->lineEdit_Name->setFocus();
-        }
-        else{
-            qDebug()<<"erro ao inserir registro";
-
-        }
     }
     else if(president){
         QString academicFormation = ui->lineEdit_morphy2->text();
@@ -188,26 +170,7 @@ void finaledit::on_bt_att_clicked()
                                       phone.toStdString(),
                                       designation.toStdString(),
                                       date,  salary);
-        QSqlQuery query;
-        query.prepare("insert into tb_funcionario (nome_funcionario,telefone_funcionario,endereco_funcionario,salario_funcionario,dia_funcionario,mes_funcionario,ano_funcionario,supervisao_funcionario,formacao_funcionario)values"
-                      "('"+name+"','"+phone+"','"+adress+"','+salary+','+day+','+mon+','+year+','"+academicFormation+"','"+degreeArea+"')");
-        if(query.exec()){
-            QMessageBox::information(this,"","Registro gravado com sucesso");
-            ui->lineEdit_Name->clear();
-            ui->lineEdit_PhoneNumber->clear();
-            ui->lineEdit_Adress->clear();
-            ui->lineEdit_Salary->clear();
-            ui->lineEdit_Day->clear();
-            ui->lineEdit_Mon->clear();
-            ui->lineEdit_Year->clear();
-            ui->lineEdit_morphy1->clear();
-            ui->lineEdit_morphy2->clear();
-            ui->lineEdit_Name->setFocus();
-        }
-        else{
-            qDebug()<<"erro ao inserir registro";
 
-        }
     }
     else if(manager){
         QString supervision = ui->lineEdit_morphy1->text();
@@ -218,26 +181,6 @@ void finaledit::on_bt_att_clicked()
                                    phone.toStdString(),
                                    designation.toStdString(),
                                    date,  salary);
-        QSqlQuery query;
-        query.prepare("insert into tb_funcionario (nome_funcionario,telefone_funcionario,endereco_funcionario,salario_funcionario,dia_funcionario,mes_funcionario,ano_funcionario,supervisao_funcionario,formacao_funcionario)values"
-                      "('"+name+"','"+phone+"','"+adress+"','+salary+','+day+','+mon+','+year+','"+supervision+"')");
-        if(query.exec()){
-            QMessageBox::information(this,"","Registro gravado com sucesso");
-            ui->lineEdit_Name->clear();
-            ui->lineEdit_PhoneNumber->clear();
-            ui->lineEdit_Adress->clear();
-            ui->lineEdit_Salary->clear();
-            ui->lineEdit_Day->clear();
-            ui->lineEdit_Mon->clear();
-            ui->lineEdit_Year->clear();
-            ui->lineEdit_morphy1->clear();
-            ui->lineEdit_morphy2->clear();
-            ui->lineEdit_Name->setFocus();
-        }
-        else{
-            qDebug()<<"erro ao inserir registro";
-
-        }
     }
     else if(operador){
         funcionario = new Operador( name.toStdString(),
@@ -245,25 +188,6 @@ void finaledit::on_bt_att_clicked()
                                     phone.toStdString(),
                                     designation.toStdString(),
                                     date,  salary);
-        QSqlQuery query;
-        query.prepare("insert into tb_funcionario (nome_funcionario,telefone_funcionario,endereco_funcionario,salario_funcionario,dia_funcionario,mes_funcionario,ano_funcionario,supervisao_funcionario,formacao_funcionario)values"
-                      "('"+name+"','"+phone+"','"+adress+"','+salary+','+day+','+mon+','+year+')");
-        if(query.exec()){
-            QMessageBox::information(this,"","Registro gravado com sucesso");
-            ui->lineEdit_Name->clear();
-            ui->lineEdit_PhoneNumber->clear();
-            ui->lineEdit_Adress->clear();
-            ui->lineEdit_Salary->clear();
-            ui->lineEdit_Day->clear();
-            ui->lineEdit_Mon->clear();
-            ui->lineEdit_Year->clear();
-
-            ui->lineEdit_Name->setFocus();
-        }
-        else{
-            qDebug()<<"erro ao inserir registro";
-
-        }
     }
 
     bool existe = false;
