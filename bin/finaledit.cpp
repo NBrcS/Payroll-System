@@ -126,9 +126,11 @@ void finaledit::on_bt_att_clicked()
     bool selected;
     if(ui->listWidget_infoExihibiton->currentRow() < 0){
         selected = false;
+        index = 0;
     }
     else{
         selected = true;
+        index = ui->listWidget_infoExihibiton->currentRow();
     }
 
     Funcionario* funcionario;

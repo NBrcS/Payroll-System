@@ -16,6 +16,7 @@ edit::edit(QWidget *parent, Empresa *empresa_) :
     ui->setupUi(this);
 
     empresa = empresa_;
+    procurou = false;
 
     ui->edit_day1->setValidator( new QIntValidator(0, 31, this) );
     ui->edit_mon1->setValidator( new QIntValidator(0, 12, this) );
@@ -26,11 +27,6 @@ edit::edit(QWidget *parent, Empresa *empresa_) :
 
     att_list();
     clear_LineEdits();
-
-
-
-
-
 }
 
 edit::~edit()
