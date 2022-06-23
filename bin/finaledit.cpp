@@ -133,7 +133,7 @@ void finaledit::on_bt_att_clicked()
         index = ui->listWidget_infoExihibiton->currentRow();
     }
 
-    Funcionario* funcionario;
+    Funcionario* funcionario = nullptr;
 
     QString name = ui->lineEdit_Name->text();
     QString phone = ui->lineEdit_PhoneNumber->text();
@@ -228,6 +228,12 @@ void finaledit::on_bt_att_clicked()
         else QMessageBox::critical(this, "ERRO", "Existe algum parametro vazio");
 
     }else if(existe && selected){
+        for(int i = 0; i < 12; i++)
+        {
+            funcionario->setHoras_trabalhadas(empresa->get_Func_com_index(index)->getHorasExtras(i), i);
+            funcionario->setDiasTrabalhados(empresa->get_Func_com_index(index)->getDiasTrabalhados(i), i);
+        }
+
         empresa->att_func(funcionario, index);
         QMessageBox::information(this, "SUCESSO", "Funcionario atualizado com sucesso");
         clear_all_edits();
