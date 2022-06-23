@@ -434,7 +434,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
 
             //nome
             if(existe[0]){
-                if(strstr(funcionarios[i]->getNome().c_str(), parametros[0].c_str()) != nullptr)
+                if(strstr(funcionarios[i]->getNome().c_str(), parametros[0].c_str()) == nullptr)
                 {
                     igual = false;
                 }
@@ -444,7 +444,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
 
             //endereco
             if(existe[1]){
-                if(strstr(funcionarios[i]->getEndereco().c_str(), parametros[1].c_str()) != nullptr)
+                if(strstr(funcionarios[i]->getEndereco().c_str(), parametros[1].c_str()) == nullptr)
                 {
                     igual = false;
                 }
@@ -454,7 +454,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
 
             //codigo
             if(existe[2]){
-                if(strstr(funcionarios[i]->getCodFuncionario().c_str(),  parametros[2].c_str()) != nullptr)
+                if(strstr(funcionarios[i]->getCodFuncionario().c_str(),  parametros[2].c_str()) == nullptr)
                 {
                     igual = false;
                 }

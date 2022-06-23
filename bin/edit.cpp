@@ -76,6 +76,7 @@ void edit::clear_LineEdits(){
 void edit::on_bt_search_clicked()
 {
     achados.clear();
+    procurou = false;
 
     if(ui->edit_name->text() != "") allLines.push_back(ui->edit_name->text());
     else allLines.push_back("");
@@ -174,6 +175,7 @@ void edit::att_list()
 
 void edit::on_pushButton_clicked()
 {
+    procurou = false;
     clear_LineEdits();
     att_list();
 }
@@ -191,6 +193,7 @@ void edit::on_bt_erase_clicked()
     else
     {
         empresa->apagar_funcionario(index);
+        on_pushButton_clicked();
         QMessageBox::information(this, "DELETAR", "O fucionario foi apagado com sucesso do sistema!");
     }
     att_list();
