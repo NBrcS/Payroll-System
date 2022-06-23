@@ -8,6 +8,7 @@ Empresa::Empresa()
     {
         this->folhaSalarial[i] = 0.0;
     }
+    funcionarios.clear();
 
     QString dir = qApp->applicationDirPath();
     QString banco = dir + "/bd_conection/db_empresa.db";
@@ -178,18 +179,20 @@ Empresa::~Empresa()
                 query2.prepare("insert into tb_funcionario (cod_funcionario,nome_funcionario,telefone_funcionario,endereco_funcionario,"
                                                             "designacao_funcionario,salario_funcionario,salario_tributado,valor_hora,"
                                                             "dia_funcionario,mes_funcionario,ano_funcionario)"
-                                "values ('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
-                                        "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
-                                        "'"+dia+"','"+mes+"','"+ano+"')");
+                                "values "
+                                                            "('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
+                                                            "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
+                                                            "'"+dia+"','"+mes+"','"+ano+"')");
 
             }else if(designacao.compare("Gerente") == 0){
                 QString areaSupervisao = QString::fromStdString(( (Gerente* ) funcionarios[i])->getAreaSupervisao());
                 query2.prepare("insert into tb_funcionario (cod_funcionario,nome_funcionario,telefone_funcionario,endereco_funcionario,"
                                                             "designacao_funcionario,salario_funcionario,salario_tributado,valor_hora,"
                                                             "dia_funcionario,mes_funcionario,ano_funcionario,areaSupervisao)"
-                                "values ('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
-                                        "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
-                                        "'"+dia+"','"+mes+"','"+ano+"','"+areaSupervisao+"')");
+                               "values "
+                                                            "('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
+                                                                "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
+                                                                "'"+dia+"','"+mes+"','"+ano+"','"+areaSupervisao+"')");
 
 
             }else if(designacao.compare("Diretor") == 0){
@@ -198,9 +201,10 @@ Empresa::~Empresa()
                 query2.prepare("insert into tb_funcionario (cod_funcionario,nome_funcionario,telefone_funcionario,endereco_funcionario,"
                                                             "designacao_funcionario,salario_funcionario,salario_tributado,valor_hora,"
                                                             "dia_funcionario,mes_funcionario,ano_funcionario,areaSupervisao,graduacao)"
-                                "values ('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
-                                        "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
-                                        "'"+dia+"','"+mes+"','"+ano+"','"+areaSupervisao+"','"+graduacao+"')");
+                               "values "
+                                                            "('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
+                                                            "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
+                                                            "'"+dia+"','"+mes+"','"+ano+"','"+areaSupervisao+"','"+graduacao+"')");
 
 
             }else if(designacao.compare("Presidente") == 0){
@@ -209,17 +213,18 @@ Empresa::~Empresa()
                 query2.prepare("insert into tb_funcionario (cod_funcionario,nome_funcionario,telefone_funcionario,endereco_funcionario,"
                                                             "designacao_funcionario,salario_funcionario,salario_tributado,valor_hora,"
                                                             "dia_funcionario,mes_funcionario,ano_funcionario,formacao_academica,graduacao)"
-                                "values ('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
-                                        "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
-                                        "'"+dia+"','"+mes+"','"+ano+"','"+formacaoAcademica+"','"+graduacao+"')");
+                               "values "
+                                                            "('"+cod+"','"+name+"','"+telefone+"','"+endereco+"','"+designacao+"',"
+                                                            "'"+salario+"','"+salario_tributado+"','"+valor_hora+"',"
+                                                            "'"+dia+"','"+mes+"','"+ano+"','"+formacaoAcademica+"','"+graduacao+"')");
             }
 
             if(!query2.exec()) qDebug() << "Erro ao inserir funcionario no banco de dados";
             else{
                 QSqlQuery query3;
-                query3.exec("insert into tb_dias_trabalhados (Janeiro, Fevereiro, Marco, Abril,"
-                                                                " Maio, Junho, Julho, Agosto,"
-                                                                " Setembro, Outubro, Novembro, Dezembro) "
+                query3.exec("insert into tb_dias_trabalhados (Janeiro,Fevereiro,Marco,Abril,"
+                                                                "Maio,Junho,Julho,Agosto,"
+                                                                "Setembro,Outubro,Novembro,Dezembro) "
                             "values "
                             "('"+QString::number(funcionarios[i]->getDiasTrabalhados(0))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(1))+"',"
                             "'"+QString::number(funcionarios[i]->getDiasTrabalhados(2))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(3))+"',"
@@ -228,9 +233,9 @@ Empresa::~Empresa()
                             "'"+QString::number(funcionarios[i]->getDiasTrabalhados(8))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(9))+"',"
                             "'"+QString::number(funcionarios[i]->getDiasTrabalhados(10))+"','"+QString::number(funcionarios[i]->getDiasTrabalhados(11))+"')");
 
-                query3.exec("insert into tb_horas_trabalhadas (Janeiro, Fevereiro, Marco, Abril,"
-                                                                " Maio, Junho, Julho, Agosto,"
-                                                                " Setembro, Outubro, Novembro, Dezembro) "
+                query3.exec("insert into tb_horas_trabalhadas (Janeiro,Fevereiro,Marco,Abril,"
+                                                                "Maio,Junho,Julho,Agosto,"
+                                                                "Setembro,Outubro,Novembro,Dezembro) "
                             "values "
                             "('"+QString::number(funcionarios[i]->getHorasExtras(0))+"','"+QString::number(funcionarios[i]->getHorasExtras(1))+"',"
                             "'"+QString::number(funcionarios[i]->getHorasExtras(2))+"','"+QString::number(funcionarios[i]->getHorasExtras(3))+"',"
@@ -239,9 +244,9 @@ Empresa::~Empresa()
                             "'"+QString::number(funcionarios[i]->getHorasExtras(8))+"','"+QString::number(funcionarios[i]->getHorasExtras(9))+"',"
                             "'"+QString::number(funcionarios[i]->getHorasExtras(10))+"','"+QString::number(funcionarios[i]->getHorasExtras(11))+"')");
 
-                query3.exec("insert into tb_salario_mensal (Janeiro, Fevereiro, Marco, Abril,"
-                                                                " Maio, Junho, Julho, Agosto,"
-                                                                " Setembro, Outubro, Novembro, Dezembro) "
+                query3.exec("insert into tb_salario_mensal (Janeiro,Fevereiro,Marco,Abril,"
+                                                                "Maio,Junho,Julho,Agosto,"
+                                                                "Setembro,Outubro,Novembro,Dezembro) "
                             "values "
                             "('"+QString::number(funcionarios[i]->get_SalarioMes(0))+"','"+QString::number(funcionarios[i]->get_SalarioMes(1))+"',"
                             "'"+QString::number(funcionarios[i]->get_SalarioMes(2))+"','"+QString::number(funcionarios[i]->get_SalarioMes(3))+"',"
@@ -253,7 +258,7 @@ Empresa::~Empresa()
         }
 
         for(int i = 0; i < 12; i++)
-            query2.exec("insert into tb_folha_empresa (folha_mensal) value ("+QString::number(folhaSalarial[i])+")");
+            query2.exec("insert into tb_folha_empresa (folha_mensal) values ('"+QString::number(folhaSalarial[i])+"')");
     }
     else qDebug() << "Banco não conseguiu ser limpo";
 }
@@ -428,7 +433,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
 
             //nome
             if(existe[0]){
-                if(funcionarios[i]->getNome().compare(parametros[0]))
+                if(funcionarios[i]->getNome().find(parametros[0]))
                 {
                     igual = false;
                 }
@@ -438,7 +443,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
 
             //endereco
             if(existe[1]){
-                if(funcionarios[i]->getEndereco().compare(parametros[1]))
+                if(funcionarios[i]->getEndereco().find(parametros[1]))
                 {
                     igual = false;
                 }
@@ -448,7 +453,7 @@ vector<int> Empresa::funcionarios_achados(vector<string> parametros)
 
             //codigo
             if(existe[2]){
-                if(funcionarios[i]->getCodFuncionario().compare(parametros[2]))
+                if(funcionarios[i]->getCodFuncionario().find(parametros[2]))
                 {
                     igual = false;
                 }

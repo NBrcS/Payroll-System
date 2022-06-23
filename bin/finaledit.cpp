@@ -26,10 +26,9 @@ finaledit::finaledit(QWidget *parent, Empresa *empresa_, int index_) :
     ui->lineEdit_Year->setValidator( new QIntValidator(1940, 2100, this) );
     ui->lineEdit_Salary->setValidator( new QIntValidator(0, 100000000, this) );
 
-    if(index != -1){
-        att_list();
-        on_listWidget_infoExihibiton_currentRowChanged(index);
-    }
+    if(index != -1) on_listWidget_infoExihibiton_currentRowChanged(index);
+    att_list();
+
 }
 
 finaledit::~finaledit()
@@ -125,7 +124,7 @@ void finaledit::on_bt_att_clicked()
 {
 
     bool selected;
-    if(ui->listWidget_infoExihibiton->currentRow() <= 0){
+    if(ui->listWidget_infoExihibiton->currentRow() < 0){
         selected = false;
     }
     else{
@@ -141,6 +140,18 @@ void finaledit::on_bt_att_clicked()
     int day = ui->lineEdit_Day->text().toInt();
     int mon = ui->lineEdit_Mon->text().toInt();
     int year = ui->lineEdit_Year->text().toInt();
+
+    if((day > 28 && mon == 2) ||
+       (mon > 12 || mon < 1) ||
+       (day > 31 || day < 1))
+    {
+        QMessageBox::critical(this, "ERRO", "Data inválida");
+        ui->lineEdit_Day->setText("");
+        ui->lineEdit_Mon->setText("");
+        ui->lineEdit_Year->setText("");
+
+        return;
+    }
 
     tm date;
     date.tm_mday = day;
@@ -209,6 +220,7 @@ void finaledit::on_bt_att_clicked()
         if(a && b && c && d && e && f && g ){
             empresa->add_func(funcionario);
             QMessageBox::information(this, "SUCESSO", "Funcionario adicionado com sucesso");
+            clear_all_edits();
 
         }
         else QMessageBox::critical(this, "ERRO", "Existe algum parametro vazio");
@@ -216,13 +228,14 @@ void finaledit::on_bt_att_clicked()
     }else if(existe && selected){
         empresa->att_func(funcionario, index);
         QMessageBox::information(this, "SUCESSO", "Funcionario atualizado com sucesso");
+        clear_all_edits();
 
     }else if(existe && !selected){
         QMessageBox::critical(this, "ERRO", "Este funcionário já está cadastrado no sistema");
     }
 
     att_list();
-    clear_all_edits();
+
 
 }
 

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "empresa.h"
+#include <QMessageBox>
 
 namespace Ui {
 class PaymentSheet;

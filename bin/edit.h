@@ -40,6 +40,8 @@ private:
     Ui::edit *ui;
     Empresa *empresa;
     vector<QString> allLines;
+    vector<int> achados;
+    bool procurou;
     Signals* mySignals;
 };
 
